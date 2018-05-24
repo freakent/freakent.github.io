@@ -31,7 +31,7 @@ theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 source: src
-destination: build
+#destination: build
 collections_dir: _collections
 collections:
   events:
