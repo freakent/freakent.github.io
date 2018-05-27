@@ -1,41 +1,7 @@
 ---
 layout: post
-status: publish
-published: true
 title: Welcome to The Gadget Zone
-author:
-  display_name: martin
-  login: martin
-  email: martin@freakent.co.uk
-  url: http://www.freakent.co.uk
-author_login: martin
-author_email: martin@freakent.co.uk
-author_url: http://www.freakent.co.uk
-wordpress_id: 6
-wordpress_url: http://www.freakent.co.uk/wordpress/?p=5
-date: '2004-04-01 10:14:48 +0100'
-date_gmt: '2004-04-01 09:14:48 +0100'
-categories:
-- Gadgets
-tags: []
-comments:
-- id: 2
-  author: Martin
-  author_email: martin.jarvis@oracle.com
-  author_url: http://kljdaskj
-  date: '2004-04-15 10:38:51 +0100'
-  date_gmt: ''
-  content: Cool site
-- id: 102
-  author: martin
-  author_email: martin@freakent.co.uk
-  author_url: http://www.freakent.co.uk
-  date: '2012-01-29 19:38:39 +0000'
-  date_gmt: '2012-01-29 19:38:39 +0000'
-  content: 8 Years later and the only thing on this list that I would still include
-    in my top ten is my beloved Tissot T Touch watch. Apart from being sent away once
-    for a week to get a new battery and a service it has never let me down and still
-    looks as good as the day I first got it.
+categories: news
 ---
 <p>This is the start of my new weblog. I'm hoping to use it to share information, news and my research into the various gadgets that come my way. I'm a real sucker for small (and sometimes not so small) electronic gizmos that do cool and interesting things. I often spend weeks researching every magazine article and web site before I finally make a choice. This blog is a big step for me. Will I have the motivation to keep it running? Who knows, but there's only one way to find out.<br />
 <!--more--><br />

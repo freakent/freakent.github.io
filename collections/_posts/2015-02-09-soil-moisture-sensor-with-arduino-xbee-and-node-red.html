@@ -1,0 +1,77 @@
+---
+layout: post
+status: publish
+published: true
+title: Soil Moisture Sensor with Arduino, XBee and Node-Red
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 918
+wordpress_url: http://www.freakent.co.uk/?p=918
+date: '2015-02-09 20:52:39 +0000'
+date_gmt: '2015-02-09 20:52:39 +0000'
+categories:
+- Internet of Things
+tags: []
+comments: []
+---
+<p>
+  <span style="color: #3c3c3c;">
+    <a href="http://www.freakent.co.uk/2015/02/09/soil-moisture-sensor-with-arduino-xbee-and-node-red/img_0266/" rel="attachment wp-att-920">
+      <img class="alignright wp-image-920" src="http://www.freakent.co.uk/wp-content/uploads/2015/02/IMG_0266.jpg" alt="IMG_0266" width="200" height="118" />
+    </a>
+    I have planted some chilli seeds and I am supposed to keep
+    them moist, only trouble is I am rubbish at remembering to
+    water my plants. I bought three cheap soil moisture sensor
+    kits off ebay and hooked them up to an Arduino. The
+    Arduino has an&nbsp;
+  </span>
+  <a style="color: #00a9de;" href="http://www.digi.com/products/wireless-wired-embedded-solutions/zigbee-rf-modules/zigbee-mesh-module/xbee-zb-module" target="_blank">
+    XBee
+  </a>
+  <span style="color: #3c3c3c;">
+    &nbsp;shield and sends messages to my Raspberry Pi over a
+    Zigbee network. The Pi is running&nbsp;
+  </span>
+  <a style="color: #00a9de;" href="http://nodered.org/" target="_blank">Node-Red</a><span style="color: #3c3c3c;">
+    &nbsp;on node.js. When the soil moisture goes above a certain
+    threshold it sends a message via&nbsp;
+  </span>
+  <a style="color: #00a9de;" href="http://www.prowlapp.com/" target="_blank">Prowl</a>
+  &nbsp;
+  <span style="color: #3c3c3c;">to my iPhone.&nbsp;</span>
+</p>
+<p><!--more--></p>
+<p>
+  <span style="color: #3c3c3c;">
+    <a href="http://www.freakent.co.uk/2015/02/09/soil-moisture-sensor-with-arduino-xbee-and-node-red/img_0271/" rel="attachment wp-att-921">
+      <img class="alignright wp-image-921" src="http://www.freakent.co.uk/wp-content/uploads/2015/02/IMG_0271.jpg" alt="IMG_0271" width="200" height="267" />
+    </a>
+    Everything worked fine for three days then the sensors failed and I
+    was continually receiving prowl alerts. Thank heavens for iOS
+    "Do Not Disturb" otherwise I would have been woken up by constant
+    alerts! It turns out that putting a continuos DC current through moist
+    soil causes electrolysis on the soil moisture probes. One probe on
+    each sensor had lost nearly all it's conductive coating. Apparently
+    the only real solution to this problem is to use AC current, swapping
+    polarity across the probes at regular intervals. I can't see how that
+    is possible with my soil moisture kits so I have now redesigned things
+    so that the sensors are only powered up for a second every 30 mins to
+    take readings. According to my calculations the probes should last
+    about 10 years this way - that should be long enough for my chillies
+    to grow.&nbsp;
+  </span>
+  <br style="color: #3c3c3c;" />
+  <br style="color: #3c3c3c;" />
+  <span style="color: #3c3c3c;">
+    Assuming I can get this working, the next step will be to connect
+    up 1 or 3 small water pumps to automate the watering. Although I
+    think I might wait until the seedlings are big enough to put outside
+    before I start spraying water all over the place in-doors.
+  </span>
+</p>

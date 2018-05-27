@@ -19,33 +19,24 @@ description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+#baseurl: "" # the subpath of your site, e.g. /blog
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: freakent
+github_username:  freakent
+#future: TRUE
 
 # Build settings
 markdown: kramdown
-#theme: minima
-excerpt_separator: <!--more-->
-paginate: 5
-paginate_path: "/blog/page:num"
-plugins:
-  - jekyll-feed
-  - jekyll-paginate
-collections_dir: collections
+#theme: jekyll-theme-minimal
+theme: minima
+#plugins:
+#  - jekyll-feed
+collections_dir: _collections
 #collections:
 #  events:
 #    output: true
 #    permalink: /:title/index
-defaults:
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-      permalink: /blog/:year/:month/:day/:title:output_ext
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -58,5 +49,5 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - bin
   - README.md
+  - bin
