@@ -1,3 +1,7 @@
+gem install jekyll-import
+
+gem install unidecode sequel mysql2 htmlentities
+
 ruby -rubygems -e 'require "jekyll-import";
     JekyllImport::Importers::WordPress.run({
       "dbname"   => "wordpress_db",

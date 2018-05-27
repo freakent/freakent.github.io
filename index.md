@@ -4,4 +4,11 @@
 
 layout: default
 ---
-Hello World, why can't you find the home layout?
+Posts
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

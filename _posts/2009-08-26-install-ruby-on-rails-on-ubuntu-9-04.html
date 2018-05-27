@@ -1,0 +1,114 @@
+---
+layout: post
+status: publish
+published: true
+title: Install Ruby-on-Rails and Phusion Passenger (mod_rails) on Ubuntu 9.04
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 306
+wordpress_url: http://www.chart-geek.com/?p=306
+date: '2009-08-26 13:43:22 +0100'
+date_gmt: '2009-08-26 12:43:22 +0100'
+categories:
+- Linux
+- Ruby-on-Rails
+tags:
+- Linux
+- mod_rails
+- passenger
+- ruby-on-rails
+- ubuntu
+comments: []
+---
+<p><img class="alignright" src="http://rubyonrails.org/images/rails.png" alt="Rails" width="87" height="111" />I have my new Atom powered server running in the loft, now it's time to put it to use and run some of the Rails applications I've been tinkering with. The following is how I installed and configured Ruby-on-Rails on Ubuntu 9.04 Server (x86 64 bit).</p>
+<p><!--more--><strong>1. Update Ubuntu before we start</strong><br />
+<code>$ sudo apt-get update<br />
+$ sudo apt-get upgrade</code></p>
+<p><strong>2. Check whether MySQL is already installed</strong><br />
+<code> $ mysql --version<br />
+mysql  Ver 14.12 Distrib 5.0.75, for debian-linux-gnu (x86_64) using readline 5.2</code><br />
+MySQL was already installed so OK to proceed.</p>
+<p><strong>2. Install Ruby</strong><br />
+<code>$ sudo apt-get install ruby irb rdoc</code><br />
+$ ruby -v<br />
+ruby 1.8.7 (2008-08-11 patchlevel 72) [x86_64-linux]</p>
+<p><strong>4. Install Ruby Gems (the Ruby package management system)</strong><br />
+There are two ways to install Ruby Gems on Ubuntu, either through apt-get or by downloading the Gem archive and running the set up script. I tried the apt-get method as that looked quicker:</p>
+<p><code>$ sudo apt-get install rubygems1.8<br />
+$ sudo gem update --system</code></p>
+<p>Unfortunately the apt-get package disables the <code>gem update --system</code> and insists that you use apt to update instead. This might be more preferable to the Linux Sysadmin crowd but I prefer to keep everything pure Ruby. It's a few extra commands but nothing too bad.</p>
+<p><code>$ wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz<br />
+$ tar xzvf rubygems-1.3.5.tgz<br />
+$ cd rubygems-1.3.5/<br />
+$ sudo ruby setup.rb<br />
+$ gem -v<br />
+$ sudo gem update --system</code></p>
+<p><strong>5. Install and test Rails</strong><br />
+<code>$ sudo gem install rails<br />
+$ cd<br />
+$ rails hello<br />
+$ cd hello<br />
+$ script/server<br />
+...<br />
+/usr/lib/ruby/gems/1.8/gems/rails-2.3.3/lib/initializer.rb:271:in `require_frameworks': no such file to load -- net/https (RuntimeError)</code></p>
+<p>A quick Google of this error message revealed that I probably should have installed the Ruby OpenSSL library when I originally installed Ruby.<br />
+<code>$ sudo apt-get install libopenssl-ruby<br />
+$ script/server</code><br />
+This time the Mongrel server started fine.</p>
+<p><strong>6. Install Passenger (mod_rails)</strong><br />
+The Rails community seem to all be switching from Mongrel to Passenger, the mod_rails Apache plug-in module. I was keen to see how a Passenger deployment compares to Mongrel.<br />
+<code>$ sudo gem install passenger<br />
+...<br />
+Failed to build gem native extension.</code><br />
+Apparently the libraries needed to build a Gem that contains native code isn't included with the main Ruby package, you need to install the Ruby Dev package too (something else I probably should have installed when I installed Ruby).<br />
+<code>$ sudo apt-get install ruby1.8-dev<br />
+$ sudo gem install passenger<br />
+$ sudo passenger-install-apache2-module<br />
+</code><br />
+Following the prompts and messages on screen it turned out I didn't have a number of Apache libraries. The passenger installer is very good and gives you the exact commands to run:<code><br />
+* To install Apache 2 development headers:<br />
+Please run apt-get install apache2-prefork-dev as root.<br />
+* To install Apache Portable Runtime (APR) development headers:<br />
+Please run apt-get install libapr1-dev as root.<br />
+* To install Apache Portable Runtime Utility (APU) development headers:<br />
+Please run apt-get install libaprutil1-dev as root.<br />
+</code><br />
+I only needed to run the first command as the other two packages must have been pulled in as dependencies.</p>
+<p><code><br />
+$ sudo passenger-install-apache2-module<br />
+...<br />
+The Apache 2 module was successfully installed.</code></p>
+<p>Please edit your Apache configuration file, and add these lines:</p>
+<p>LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.2.4/ext/apache2/mod_passenger.so<br />
+PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.2.4<br />
+PassengerRuby /usr/bin/ruby1.8</p>
+<p>...</p>
+<p><strong>7. Adding Passenger to the Ubuntu Apache2 Configuration</strong><br />
+Whilst you could just add the Passenger configuration to your apache2.conf file, the Debian/Ubuntu way is to have a separate file for each module. So create a new file called passenger.load in /etc/apache2/mods-available and add the lines provided by the Passenger installer above. Then run the a2enmod to enable the Passenger module. This little script actually creates links in the mods-enabled subdirectory which are then picked up by the main Apache configuration file.<br />
+<code>$sudo a2enmod<br />
+Which module would you like to enable?<br />
+Your choices are: actions asis auth_anon auth_dbm auth_digest auth_ldap cache cern_meta cgid cgi dav_fs dav deflate disk_cache expires ext_filter file_cache headers imap include info ldap mem_cache mime_magic <strong>passenger</strong> php5 proxy_connect proxy_ftp proxy_http proxy rewrite speling ssl suexec unique_id userdir usertrack vhost_alias<br />
+Module name? passenger<br />
+Module passenger installed; run /etc/init.d/apache2 force-reload to enable.<br />
+...<br />
+</code><br />
+To finish enabling your Passenger module you just need to tell Apache to reload.<br />
+<code> $ sudo /etc/init.d/apache2 reload<br />
+</code></p>
+<p><strong>8. Adding Your Rails App to Passenger</strong><br />
+Again, you could just add your site to the Apache config file using a <code>virtual host<code> directive, but the Debian/Ubuntu way is to use a sites-available/sites-enabled set up, similar to the Apache modules set up. A default web site was configured using <code>/etc/apache2/sites-available/default</code>, which publishes the directory <code>/var/www</code> via Apache.</code></code></p>
+<p>I wanted to make my Rails app available as a subdirectory off the server's domain, e.g. http://server.local/testapp. All you have to do is create a soft link from your Rails app's public directory to the /var/www directory and the tell Passenger to treat this direftory as a Rails app.</p>
+<p><code>$ ln -s /usr/martin/testapp/public /var/www/testapp</code></p>
+<p>Add the following to <code>/etc/apache2/sites-available/default</code>:<br />
+<code>...<br />
+RailsBaseURI /testapp<br />
+</code><br />
+<em>If you want to use http://testapp.domain/ then you'll have to check the documentation on the <a href="http://www.modrails.com/documentation/Users%20guide%20Apache.html#_deploying_to_a_virtual_host_8217_s_root">Phusion Passenger</a> site and create a new sites_available file. </em></p>
+<p><strong>Useful Resources</strong><br />
+<a href="http://www.railsgarden.com/2008/04/12/configurating-passenger-mod_rails-on-slicehost-with-ubuntu-710/">Blog entry on installing and configuring Passenger on Ubuntu 7.10.</a></p>

@@ -1,0 +1,90 @@
+---
+layout: post
+status: publish
+published: true
+title: Semantics in Oracle 11g R2
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 408
+wordpress_url: http://www.freakent.co.uk/?p=408
+date: '2011-05-17 20:57:49 +0100'
+date_gmt: '2011-05-17 20:57:49 +0100'
+categories:
+- Oracle
+tags:
+- oracle
+- semantics
+- rdf
+- database
+- triples
+comments: []
+---
+<p><a href="http://www.oracle.com"><img class="alignright" title="Oracle Database 11g" src="http://www.oracleimg.com/technetwork/middleware/bi-foundation/oracle-database-11g-1-121135.gif" alt="" width="129" height="39" /></a>I have been researching the technologies behind the Semantic Web for a rather interesting project. Having read as much as I could (none of it great), I manged to created a RDF model and a very basic ontology to do some experiments using SPARQL and the <a href="http://jena.sourceforge.net/">Jena tool kit</a>. I really struggled to get the inferencing to work on Jena so I thought I'd give it a try in Oracle instead.</p>
+<p><!--more--></p>
+<p>I set up my semantic model in Oracle as per the manual, having previously used SEM_APIS.CREATE_SEM_NETWORK to add RDF support to my database.</p>
+<p><code>SQL> create table address_book_rdf_data(id number, triple sdo_rdf_triple_s);</code></p>
+<p><code>SQL> execute sem_apis.create_sem_model('address_book', 'address_book_rdf_data', 'triple');</code></p>
+<p>Next I tried to load model I created earlier into Oracle using the <a href="http://download.oracle.com/docs/cd/E11882_01/appdev.112/e11828/sdo_rdf_concepts.htm#CHDIHAGI">Oracle Java Bulk Loader</a>. First problem was the Oracle RDF bulk loader only supports data files in N-Triple format. I created my model in <a title="Notation-3 Tutorial" href="http://www.w3.org/2000/10/swap/doc/Overview.html" target="_blank">Notation-3 (N3)</a> format as I find it the easiest format to actually read. A quick google brought up this useful site for converting between RDF formats.</p>
+<p><a href="http://www.mindswap.org/2002/rdfconvert/">http://www.mindswap.org/2002/rdfconvert/</a></p>
+<p>I created a small script to invoke the bulk loader.</p>
+<p><code>cp=${ORACLE_HOME}/md/jlib/sdordf.jar:${ORACLE_HOME}/jdbc/lib/ojdbc5.jar<br />
+db='-Ddb.user=ab -Ddb.password=ab -Ddb.host=localhost -Ddb.port=1521 -Ddb.sid=orcl'<br />
+java $db -classpath $cp oracle.spatial.rdf.client.BatchLoader contacts.nt ADDRESS_BOOK_RDF_DATA RDF_USERS address_book</code></p>
+<p>I found that if the loader failed for any reason, such as invalid username, it leaves behind a temporary table that prevents it running subsequently. To clear the temporary table you have to log in as a priviledged user (system in my case) and run this piece of SQL.</p>
+<p><code>SQL> drop table mdsys.RDF_LINK$_TEMPBM$;</code></p>
+<p>Eventually I got the bulk loader to partially run before it stopped with the following error:</p>
+<p><code>$ sh load.sh<br />
+Note: You can use JVM properties -Ddb.user= -Ddb.password=<br />
+-Ddb.host= -Ddb.sid= -Ddb.port=<br />
+to configure database connection.<br />
+JVM property -Dappend=true can be used to specify APPEND mode. By default, this option is false.<br />
+JVM property -Dexchange=true can be used to allow table partition exchange which is faster and less space consuming.<br />
+This option is less robust though. By default, it is false</code></p>
+<p><code>Connecting to jdbc:oracle:thin:@localhost:1521:orcl as user ab<br />
+Insert mode<br />
+Load triples into one column and populate another ID column<br />
+Batch loading started...<br />
+Subject: <http://freakent.co.uk/addressbook/phone-numbers/447xxxxxxxx0><br />
+Property: <http://freakent.co.uk/addressbook/phone-numbers/number><br />
+Object: "+447xxxxxxxx0"</code></p>
+<p>Loading up to rows = 69<br />
+java.sql.SQLException: ORA-55315: batch load attempt failed: SQLERRM=ORA-14098: index mismatch for tables in ALTER TABLE EXCHANGE PARTITION ORA-06512: at "MDSYS.SDO_RDF_INTERNAL", line 5929<br />
+ORA-06512: at "MDSYS.MD", line 1723<br />
+ORA-06512: at "MDSYS.MDERR", line 17<br />
+ORA-06512: at "MDSYS.SDO_RDF_INTERNAL", line 5950<br />
+ORA-06512: at "MDSYS.SDO_RDF_INTERNAL", line 5960<br />
+ORA-06512: at "MDSYS.RDF_APIS", line 1283<br />
+ORA-06512: at line 1</p>
+<p>&nbsp;</p>
+<p><code>at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:439)<br />
+at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:395)<br />
+at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:802)<br />
+at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:436)<br />
+at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:186)<br />
+at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:521)<br />
+at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:202)<br />
+at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:1005)<br />
+at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1307)<br />
+at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3449)<br />
+at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3550)<br />
+at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:4693)<br />
+at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1086)<br />
+at oracle.spatial.rdf.client.NTripleConverter.loadNTriple(NTripleConverter.java:648)<br />
+at oracle.spatial.rdf.client.BatchLoader.main(BatchLoader.java:302)<br />
+</code><br />
+I have put a question on the<a href="http://forums.oracle.com/forums/thread.jspa?threadID=2224297&amp;tstart=0"> OTN discussion forum</a>, if I get a response I'll update this post.</p>
+<p>Update:&nbsp; This is the response I received.</p>
+<p><code>Hi, That loader (oracle.spatial.rdf.client.NTripleConverter) is a bit old. Please use the loader provided in Jena Adapter. You can refer to Example 7-3 of the following document. You may want to use addInBulk. <a href="http://download.oracle.com/docs/cd/E18283_01/appdev.112/e11828/sem_jena.htm#CBBCIJAD">http://download.oracle.com/docs/cd/E18283_01/appdev.112/e11828/sem_jena.htm#CBBCIJAD</a><br />
+Thanks, Zhe<br />
+</code><br />
+So I followed that advice and it worked a treat!</p>
+<h2>One more thing...</h2>
+<p>Whilst doing this work with the Oracle database, I discovered a nice little trick in SQLPlus on Linux. On Windows it is very nice to be able to use your keyboard arrow keys to go back through your SQLPlus command history and make edits. On Linux this does not work by default. I found a few blogs that suggested using rlwrap to invoke sqlplus. I quickly installed rlwrap using yum and set up an alias in my .bashrc, it works perfectly.</p>
+<p><code>alias sqlplus='rlwrap sqlplus'<br />
+</code></p>

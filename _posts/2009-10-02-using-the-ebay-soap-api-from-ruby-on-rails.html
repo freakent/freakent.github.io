@@ -1,0 +1,114 @@
+---
+layout: post
+status: publish
+published: true
+title: Using the eBay SOAP API from Ruby-on-Rails
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 341
+wordpress_url: http://www.freakent.co.uk/?p=341
+date: '2009-10-02 12:41:28 +0100'
+date_gmt: '2009-10-02 11:41:28 +0100'
+categories:
+- Ruby-on-Rails
+tags:
+- ebay
+- ebay4r
+- ruby-on-rails
+- soap
+- soap4r
+comments:
+- id: 30
+  author: James
+  author_email: jelumb@gmail.com
+  author_url: ''
+  date: '2010-04-12 08:02:32 +0100'
+  date_gmt: '2010-04-12 07:02:32 +0100'
+  content: |-
+    Hey, I've been trying to get this to work for hours without success. Do you have a sample project you can post?
+
+    Thanks in advance!
+---
+<p><img style="float: right;" src="http://developer.ebay.com/DevZone/XML/docs/Reference/eBay/i/logoEbayDev_x45_ss.gif" alt="" /><em>This article applies to:<br />
+Rails 2.3.4, Ruby 1.8.6, <a href="http://dev.ctor.org/soap4r">soap4r </a>gem 1.5.8, <a href="http://github.com/up_the_irons/ebay4r">ebay4r </a>1.1<br />
+</em></p>
+<p>I have been taking a look at ways to integrate a Rails application with eBay. They support a number of different programming interfaces and, if you are using Javascript, PHP, Java or .Net, have some good examples to follow. I managed to get a Javascript interface working quite easily from inside a Rails _form view, but it just does not feel like the most elegant solution to me.</p>
+<p>Since eBay provide a well documented SOAP API I thought it would be a good opportunity to investigate Ruby's support for SOAP.  SOAP support is a standard feature of Ruby and is provided by a library called <a href="http://dev.ctor.org/soap4r">soap4r</a>. I tried implementing my own call to eBay's GetItem interface, but I encountered a few problems and soap4r's documentation didn't help much either. Then I discovered a library called <a href="http://github.com/up_the_irons/ebay4r">ebay4r </a>which is built on top of soap4r. The rest of this article describes how I successfully integrated my Rails application with eBay using ebay4r.</p>
+<p><!--more--></p>
+<p><strong>Step 1) Load the gems into your Rails application</strong><br />
+ebay4r needs a later version of the soap4r API than ships with Ruby. It's easy to install the gem but there are some <a href="http://dev.ctor.org/soap4r/ticket/433">warnings </a>on the ebay4r and soap4r web sites about how to avoid API version conflicts caused by gem. Adding both via config.gem seems to avoid this problem completely so the workarounds suggested should not be needed.  Edit your environment.rb and add the two new config.gem lines shown below :<br />
+<code>config.gem "soap4r", :lib => false<br />
+config.gem "ebay", :lib=> false<br />
+</code><br />
+Next, use rake to ensure these gems are installed:<br />
+<code>rake gems:install<br />
+</code></p>
+<p><strong>Step 2) Obtain eBay Authentication Keys<br />
+</strong>The eBay SOAP api requires that you authenticate with a set of four keys; AppId, DevId, CertId and AuthToken. You get these authentication keys by signing on to the <a href="http://developer.ebay.com/">eBay Developers Program</a>. You should be able to view the first three keys from your <a href="https://developer.ebay.com/DevZone/account/Default.aspx">eBay Developer Account</a> page. The AuthToken is a little bit special. Whilst the other keys are used to authenticate your use of the API, the AuthToken is used to actually determine which user your API calls will run as. Without an AuthToken you can only retrieve public information. I'm not even sure if ebay4r supports making API calls without an AuthToken. To get your AuthToken, click on the "<a href="https://developer.ebay.com/DevZone/account/tokens/">get a user token</a>" link on your profile page and follow the instructions.</p>
+<p><strong>Step 3) Set up eBay configuration parameters<br />
+</strong>ebay4r suggests saving the four authentication keys in a Ruby file called 'myCredentials.rb' and then loading the file to create some global variables. Whilst it works, it's not very Rails. I created a custom initialiser and a yaml config file to hold my values.<br />
+<code>#config/initializers/ebay_config.rb<br />
+require 'yaml'<br />
+EBAY_CONFIG = YAML.load_file("#{RAILS_ROOT}/config/ebay.yml")[RAILS_ENV]<br />
+</code><br />
+<code># config/ebay.yml<br />
+common: &amp;common<br />
+DevId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+AppId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+CertId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+AuthToken: xxxxxxxxxxxx ...more... xxxxxxxxxxx</p>
+<p>development:<br />
+<< : *common</p>
+<p>test:<br />
+<< : *common</p>
+<p>production:<br />
+<< : *common<br />
+</code><br />
+<strong>Step 4) Create an application model to represent the eBay Interface<br />
+</strong>Whilst I could just invoke the ebay4r methods directly from my business logic, I prefer to insulate the rest of my code from an external API. I created an EbayTrader class in my application's models directory:<br />
+<code># app/models/ebay_trader.rb<br />
+require 'eBayAPI'</p>
+<p>class EbayTrader</p>
+<p>attr_accessor :eBay</p>
+<p>def initialize<br />
+@eBay = EBay::API.new(EBAY_CONFIG['AuthToken'], EBAY_CONFIG['DevId'], EBAY_CONFIG['AppId'], EBAY_CONFIG['CertId'])<br />
+end</p>
+<p>def test<br />
+@eBay.GeteBayOfficialTime<br />
+end</p>
+<p>end<br />
+</code><br />
+Two things to notice:</p>
+<ol>
+<li> the <em>test</em> method. Throughout the eBay API documentation you will see the GeteBayOfficialTime call being used to test the interface is configured correctly. My test method does exactly the same and makes it easy to test in the script/console.</li>
+<li> the EBAY_CONFIG built in step 3 is used to provide the authentication keys during initialisation.</li>
+</ol>
+<p><strong>Step 5) Test Your eBay API Configuration<br />
+</strong>Before we go any further it's worthwhile testing to make sure you can actually connect to eBay. Use script/console to run our test method.<br />
+<code>$ script/console<br />
+Loading Development Environment (Rails 2.3.4)<br />
+>> et=EbayTrader.new<br />
+...<br />
+>> et.test<br />
+...</code></p>
+<p>You should see irb output to indicate that the code connected to eBay and returned the eBay Official Time. If not check the errors and try again.</p>
+<p><strong>Step 6) Implement Specific Calls to the API<br />
+</strong>Now we are ready to put our set up to work. The ebay4r library makes calling the eBay APIs very simple. The full list of API calls available can be found on the <a href="http://developer.ebay.com/support/docs/Default.aspx">eBay Developer Program Documentation</a> pages.</p>
+<p>eBay are very careful to version their API so that you will be less affected by any changes they make. The underlying SOAP API requires you to specify which version of the API you are using when you make an API call. Version 1.1 of ebay4r was built for eBay API v583, so just make sure that the API call and the parameters you want to use are supported by v583 of the eBay API. Rebuilding ebay4r for the latest eBay API should be straightforward (thanks to soap4r) but is beyond the scope of this article.</p>
+<p>I want to use the API to get detailed information about an auction item. The underlying eBay API for this is <a href="http://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GetItem.html">GetItem</a>, which is part of the Trading API set. If you take a look at the API documentation you can see the in and out parameters for the API call. For GetItem the main in parameter is ItemID, most of the others are optional. ebay4r allows parameters to be passed to an API call as a Ruby symbol. The out parameters are converted you object methods making the results very easy to navigate.  So in our model we can use:<br />
+<code># app/models/ebay_trader.rb<br />
+...<br />
+def get_item(item_id)<br />
+result = @eBay.GetItem(:ItemID => item_id)<br />
+result.item<br />
+end<br />
+...<br />
+</code></p>
+<p><strong>Summary</strong><br />
+That's the basic eBay integration done. Accessing the EbayTrader model from a controller or some other piece of business logic should be straight forward. I will add a step 7 to this article in the not too distant future to demonstrate this and to explain more about how to access the results of an Ebay API call.  In the mean time just take a look at the examples provided by ebay4r.</p>

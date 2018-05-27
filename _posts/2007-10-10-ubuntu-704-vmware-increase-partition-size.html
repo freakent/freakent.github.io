@@ -1,0 +1,43 @@
+---
+layout: post
+status: publish
+published: true
+title: Ubuntu 704 on VMWare - Increase root partition size
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 129
+wordpress_url: http://www.freakent.co.uk/archives/128
+date: '2007-10-10 17:50:54 +0100'
+date_gmt: '2007-10-10 16:50:54 +0100'
+categories:
+- Linux
+tags:
+- ubuntu
+- virtualisation
+- VMWare
+comments: []
+---
+<p>The root partition of my Ubuntu 704 Server Virtual Machine was only 5GB and was filling up regularly. Incresing the size is quite complex as you have to increase the size of the VMWare disk file, then increase the size of the file system partition within the disk file. Here are the steps I went through and a few hints and tips along the way.</p>
+<p><!--more-->1. On the host system, increase size of VMWare disk files</p>
+<p><em>(I added the VMWare folder to my PATH first)</em></p>
+<p><code>D:\VMWare\ubuntu704server>vmware-vdiskmanager -x 10GB Ubuntu.vmdk</code></p>
+<p>I also changed the file type to dynamically extend (that's the -t 0), which renames the file in the process. This is an optional step as it can affect the performance of the VM.</p>
+<p><code>D:\VMWare\ubuntu704server>vmware-vdiskmanager -r Ubuntu.vmdk -t 0 Ubuntu-000001.vmdk</code></p>
+<p>2. Download the latest <a href="http://gparted.sourceforge.net/livecd.php">gparted livecd</a> and save to host's file system</p>
+<p>gparted is a GUI tool for manipulating partitions. I tried a number of different tools before the <strong>gparted livecd</strong>, including <strong>qtparted </strong>on the latest <strong>Knoppix livecd</strong>. With the <strong>Knoppix qtparted</strong>, the resize option was continually greyed out. I did some digging and it seems the underlying <strong>parted </strong>didn't like whatever Ubuntu do to the ext3 file system, so any tools on top (such as <strong>qtparted</strong>) can't resize. The <strong>gparted livecd</strong> worked perfectly so I didn't investigate further.</p>
+<p>3. In the VM settings, change the VM's CDROM to point to the newly downloaded gparted livecd iso image</p>
+<p>4. Boot the VM, but press Esc asap and tell the VMWare bios to boot from CD first</p>
+<p>5. Reboot the VM into the <strong>gparted livecd</strong></p>
+<p>6. When it eventually loads,  point <strong>gparted </strong>at the disk device (/dev/sda). Delete the swap partition (/dev/sda5) and then delete the logical partition (/dev/sda2). /dev/sda5 was "inside" /dev/sda2.</p>
+<p>The /dev/sda5 swap partition was at the end of the original 5GB drive, but was now sitting in the middle of my 10GB. I couldn't figure out how to move the swap back so it was just easier to drop it and recreate it after I resized the main /dev/sda1 partition.</p>
+<p>7. Resize the 1st partition to almost fill the available space, saving 512MB for a new swap partition</p>
+<p>8. Create a new logical partition in the available space, gparted should automatically name this /dev/sda2 when you commit changes.</p>
+<p>9. Create a new linux-swap partition inside the /dev/sda2 partition, gparted should automatially name this /dev/sda5 when you commit changes.</p>
+<p>10. Reboot the VM, enter the VMWare BIOS and change boot priority so that the VM will boot from it's disk.</p>
+<p>That's it !</p>

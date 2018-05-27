@@ -1,0 +1,138 @@
+---
+layout: post
+status: publish
+published: true
+title: Ruby on Rails on Oracle and Weblogic
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 386
+wordpress_url: http://www.freakent.co.uk/?p=386
+date: '2011-04-28 16:03:57 +0100'
+date_gmt: '2011-04-28 16:03:57 +0100'
+categories:
+- Software Development
+- Oracle
+- Ruby-on-Rails
+tags:
+- programming
+- ruby-on-rails
+- oracle
+- weblogic
+- java
+- warble
+- jruby
+- CentOS
+comments:
+- id: 114
+  author: Jared
+  author_email: jared@appfly.com
+  author_url: ''
+  date: '2012-02-20 18:38:40 +0000'
+  date_gmt: '2012-02-20 18:38:40 +0000'
+  content: "I don't suppose you know which version of Warbler you used here?  \r\n\r\nI
+    cannot for the life of me get a rails app to boot up on my client's WebLogic.
+    \ Current warbler is 1.3.2 (containing jruby-core-1.6.6, jruby-rack-1.1.3)\r\n\r\nThe
+    WebLogic my client has is 10.3.0.0 - I'm not sure if this version is an issue.
+    \ The WAR file does not include a rackup / config.ru file when building.  If I
+    leave it out it doesn't boot up.  If I manually put it in, I get rack errors that
+    it can't find any gem files.  \r\n\r\nI'd like to try a version of warbler you
+    tried - if you know this I will compare the versions to see if something went
+    wrong here.\r\n\r\nMany thanks"
+- id: 119
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2012-02-27 12:28:05 +0000'
+  date_gmt: '2012-02-27 12:28:05 +0000'
+  content: Hi Jared, I can't be exactly sure which version of the Warbler gem I used,
+    I have both 1.3.0 and 1.2.1 on my system.  I also have jruby-rack 1.0.8 and 1.0.7
+    with jruby-1.6.0. I hope that is of some help. What errors are you getting in
+    your log file? Is Weblogic even trying to start the Rails app?
+- id: 121
+  author: Jared
+  author_email: jared@appfly.com
+  author_url: ''
+  date: '2012-02-27 17:01:26 +0000'
+  date_gmt: '2012-02-27 17:01:26 +0000'
+  content: "Thanks Martin.  I ended up finally booting up the Rails app in Weblogic.
+    \ \r\n\r\nI used the following gem combo: \r\n- jruby-rack 1.0.2\r\n- jruby-jars
+    1.5.1\r\n- warbler 1.2.1\r\n\r\nThe error was in Rack - I have a feeling the current
+    Jruby rack was wrong:  as mentioned above the latest one really wanted a rackup
+    file, which warbler didn't include by default.  And with it, I would then receive
+    gem dependency errors.  Using the above combo of gems, it ran with default settings
+    straight out of the box.  I'm attempting to push it to jruby 1.6 though!\r\n\r\nCheers\r\nJared"
+---
+<p><img class="alignright" src="http://www.jimguckin.com/wp-content/uploads/2010/07/OracleLogo.jpg" alt="Oracle" width="200" />Although I&rsquo;m a massive fan of Rails, my background (and my professional life) is Java and Oracle. It was inevitable that I would try to bring these worlds together at some point.  The following is a description of how I took and existing Rails 3 app, which was developed on SQLite  and runs in production on MySQL,  and got it to work on Weblogic  10.3.4.0 and Oracle 11g R2 database.<br />
+<!--more--><br />
+My application is a fairly standard Rails 3 web application, with 7 simple controllers and the appropriate resource actions. There&rsquo;s a little bit of Ajax in the UI provided by JQuery. I&rsquo;m currently running it on Rails 3.0.4 and using Bundler to manage my Gem dependencies.</p>
+<p>My operating system of choice for this project was CentOS  5 (32 bit), running as a VirtualBox guest. CentOS is a derivative of Redhat and is the only truly open Enterprise Linux distribution. I manage my Ruby environment using RVM, using it to install both Ruby 1.9.2 and JRuby. I also installed OpenJDK 1.6 for my Java runtime environment.</p>
+<p>To get started I took a clone of my application from my Git repository and made sure it ran against the SQLite locally using Ruby 1.9.2 and WEBrick. The only issue I had was getting SQLite 3.6.2 (which is the version required by the sqlite3-ruby gem) installed in CentOS. I temporarily added the ATrpms repository to my Yum config (see below) to get it in the end.</p>
+<p>Set up repo file /etc/yum.repos.d/ATrpms.repo</p>
+<p><code>[atrpms]<br />
+name=Fedora Core $releasever - $basearch - ATrpms<br />
+baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/testing<br />
+#baseurl=http://dl.atrpms.net/el$releasever-$basearch/atrpms/stable<br />
+gpgkey=http://ATrpms.net/RPM-GPG-KEY.atrpms<br />
+gpgcheck=1<br />
+</code></p>
+<p><code>$ sudo yum update<br />
+</code></p>
+<p>Next I ran the same application configuration under JRuby, just by using RVM to switch Ruby environments. I had to add the appropriate JDBC SQLite adapter gem to my bundler Gemfile.  I discovered a nifty bundler trick using the &ldquo;platforms&rdquo; statement which let me configure gems based on my Ruby runtime environment.</p>
+<p>Set up Gemfile In Rails app root directory</p>
+<p><code>platforms :jruby do<br />
+gem 'jruby-openssl'<br />
+gem 'ffi'<br />
+gem 'ffi-ncurses'<br />
+gem 'activerecord-jdbcsqlite3-adapter', :group => [:development, :test]<br />
+end<br />
+</code><br />
+Now that I had the app running under JRuby and was confident that my JRuby environment was properly configured, it was time to get it running against the Oracle database. My CentOS server has a regular install of Oracle 11g Enterprise Edition. You can download it from http://otn.oracle.com for evaluation purposes. You could also use the XE edition if you want the slightly less featured free version of Oracle. Either way, just download and follow the install instructions provided. The 11g R2 Enterprise Edition install was one of the simplest Oracle installs I have ever experienced.</p>
+<p>With the database installed, I created a new Rails database environment in my application&rsquo;s config/database.yml file. This way I could switch database environments just by changing the RAILS_ENV environment variable.</p>
+<p><code>oradev:<br />
+adapter: jdbc<br />
+driver: oracle.jdbc.OracleDriver<br />
+url: jdbc:oracle:thin:@localhost:1521:orcl<br />
+username: expenses<br />
+password: XXXXXXXXXXXX<br />
+</code></p>
+<p>After creating the necessary database user and running the migrations I was able to run my application against the Oracle database under JRuby.  The only issue I discovered was my use of the MySQL/SQLite keyword IFNULL in one piece of SQL.  I was planning to create a simple IFNULL database function under Oracle (using NVL) to emulate the the MySQL/SQlite function (a wise man once told me it&rsquo;s easy to make a more powerful system look like a less powerful one), but a little bit of Googling turned up the COALESCE function. I&rsquo;ve been using Oracle for over 20 years but had never seen this. I was able to do a straight switch of the IFNULL function with COALESCE.  Aren&rsquo;t standards great.</p>
+<p>Final step was to get the application running under the Oracle Weblogic Java EE server. I chose the Weblogic Development distribution to download and install from OTN. To install you basically unpack a zip file in the correct directory and run a few configuration scripts. All the info required was in the Weblogic README file. Once the Weblogic server was installed, I created a new Weblogic domain for my JRuby application using $WEBLOGIC_HOME /wlserver/common/bin/config.sh. Just fill out the form to create a new domain. Choose a suitable folder and name for your domain (I called mine &ldquo;jrubydomain&rdquo;) and be careful to get the right path to your Java environment. Once the domain is created you can start the server using the script automatically created in your domain&rsquo;s root directory:</p>
+<p><code>$ ./startWebLogic.sh<br />
+</code><br />
+You can connect to the domain&rsquo;s administration interface using your web browser and the URL http://localhost:7001/console (assuming you didn&rsquo;t change any of the defaults). Use the username and password you defined during domain creation to log in.</p>
+<p>To turn my Rails app into a Java EE app I used the excellent Gem, <a href="https://github.com/nicksieger/warbler">Warbler</a>. Warbler is a set of Rake tasks that create a Java EE WAR file of your Rails app that can be deployed to a standard Java EE server.  From your application&rsquo;s root directory you type warble and a few seconds later you have a complete WAR file containing your app and all the dependent Gems.  To deploy the WAR file you can go into the Weblogic domain administration interface and click the deployments link in the menu bar on the left. Then click install and follow the steps to upload your warbler created WAR file. Pay attention to the Context Root setting as this is needed to run your application, mine is set to /Expenses. To run and test my application I just pointed another browser window at http://localhost:7001/Expenses.</p>
+<p>At this point I received the famous &ldquo;Rails Application Failed To Start&rdquo; page. Looking at the Weblogic server output I could see a problem with some class dependencies involving the Joda date/time library.  I have to give credit and thanks to agardiner for working out the solution to this problem.  (Full description here <a href="https://github.com/nicksieger/jruby-rack/issues/24">https://github.com/nicksieger/jruby-rack/issues/24</a>)</p>
+<p>&ldquo;The issue occurs because WebLogic 10.3 includes an old version of Joda Time (version 1.2.1), which predates the addition of the withYear method on DateTime. This version is referenced in the manifest of the weblogic.jar file, and thus is higher in the classloader hierarchy than anything your web app references or includes, including JRuby.&rdquo;</p>
+<p>Fortunately he also proposed a simple solution that worked perfectly. Using a WEB-INF/weblogic.xml file it is possible to configure Weblogic to &ldquo;give higher priority to any Java classes found in your WAR file, thereby ensuring that JRuby gets to use the bundled version of Joda Time.&rdquo;</p>
+<p>I created the following weblogic.xml file in my Rails application&rsquo;s config directory.<br />
+<code><weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/weblogic-web-app"><br />
+<container-descriptor><br />
+<!--<br />
+The following entry is necessary to prevent Weblogics old 	version of the Joda time JAR (1.2.1) from taking precendence<br />
+over the much more recent version (1.6.0) included in JRuby.<br />
+Without this setting, Rails 3 will fail to start, due to the<br />
+missing withYear method on org.joda.time.DateTime.<br />
+--></p>
+<prefer-web-inf-classes>true</prefer-web-inf-classes>
+</container-descriptor><br />
+</weblogic-web-app><br />
+</code><br />
+To have Warbler include this weblogic.xml file correctly in your WAR file you need to create a warbler.rb config file in your application&rsquo;s config directory. The easiest way to do this is let Warbler create a default file for you by typing:<br />
+<code>$ warble config </code></p>
+<p>Edit the warble.rb and add the following line:<br />
+<code>...<br />
+# Files for WEB-INF directory (next to web.xml). This contains<br />
+# web.xml by default. If there is an .erb-File it will be processed<br />
+# with webxml-config. You may want to exclude this file via<br />
+# config.excludes.<br />
+# config.webinf_files += FileList["jboss-web.xml"]<br />
+config.webinf_files += FileList["config/weblogic.xml"]<br />
+...<br />
+</code><br />
+Now run the warble command again to recreate your WAR file. This time it should include the new weblogic.xml file. Use the domain&rsquo;s administration interface again to re-deploy the WAR file. At this point my application started up fine and I was able to successfully test it.</p>

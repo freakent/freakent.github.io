@@ -1,0 +1,124 @@
+---
+layout: post
+status: publish
+published: true
+title: iDoorbell v2 - Using Prowl, Arduino, XBee ZB and ACS712 Current Sensor
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 549
+wordpress_url: http://www.freakent.co.uk/?p=549
+date: '2012-02-10 18:23:02 +0000'
+date_gmt: '2012-02-10 18:23:02 +0000'
+categories:
+- Internet of Things
+tags:
+- java
+- Arduino
+- iphone
+- prowl
+- xbee
+- zigbee
+- acs712
+- ios
+- apache camel
+- apache servicemix
+- osgi
+comments:
+- id: 232
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2013-01-09 13:57:44 +0000'
+  date_gmt: '2013-01-09 13:57:44 +0000'
+  content: "I found a link to this very similar project on Make's favourite projects
+    of 2012.\r\nhttp://makeprojects.com/Project/Notifying+Doorbell+with+PushingBox/2165/1#.UO12-ImLJ9S"
+- id: 622
+  author: iDoorbell &#8211; Arduino powered iPhone notifications &#8211; Stuff for
+    Gadgeteers and Makers
+  author_email: ''
+  author_url: http://www.freakent.co.uk/2011/11/07/idoorbell/
+  date: '2013-09-04 21:45:04 +0100'
+  date_gmt: '2013-09-04 21:45:04 +0100'
+  content: "[&#8230;] Please Note: This project was updated and improved and is described
+    here :&nbsp;iDoorbell v2 [&#8230;]"
+- id: 640
+  author: Node-RED and XBee &#8211; Stuff for Gadgeteers and Makers
+  author_email: ''
+  author_url: http://www.freakent.co.uk/2013/09/26/node-red-and-xbee/
+  date: '2013-09-26 20:06:23 +0100'
+  date_gmt: '2013-09-26 20:06:23 +0100'
+  content: "[&#8230;] now have everything I need to create v3 of my iDoorbell project,
+    replacing Apache ServiceMix with Node-RED. Node-RED is looking like a much simpler
+    and easier to [&#8230;]"
+- id: 5445
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2014-05-02 15:32:26 +0100'
+  date_gmt: '2014-05-02 15:32:26 +0100'
+  content: Here's another cool "smart" door bell project using a Raspberry Pi http://www.muacksandglomps.com/blog/2014/04/29/pebblypi-smart-doorbell/
+- id: 19472
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-07-28 23:33:50 +0100'
+  date_gmt: '2015-07-28 23:33:50 +0100'
+  content: "Here's another link to a very similar project from someone who knows there
+    electronics way better than I do.\r\nhttp://lowpowerlab.com/blog/2015/04/13/doorbell-moteino/"
+- id: 26523
+  author: website design
+  author_email: josefinaberger@googlemail.com
+  author_url: https://www.linksol.co.uk/
+  date: '2018-05-17 10:55:24 +0100'
+  date_gmt: '2018-05-17 10:55:24 +0100'
+  content: "Awesome website you have here but I was wanting to know if you knew of
+    any community forums that cover the \r\nsame topics discussed in this article?
+    I'd really like to be a part of online community where I can get responses from
+    other knowledgeable individuals that share the \r\nsame interest. If you have
+    any recommendations, please let \r\nme know. Many thanks!"
+---
+<p><a href="http://www.freakent.co.uk/2011/11/07/idoorbell/img_1456/" rel="attachment wp-att-565"><img class=" wp-image-565 alignright" alt="iDoorbell screen shot" src="http://www.freakent.co.uk/wp-content/uploads/2013/01/IMG_1456.jpg" width="146" height="224" /></a>Last year I created a <a href="http://www.freakent.co.uk/2011/11/07/idoorbell&lrm;">project to Internet enable my doorbell&nbsp;(iDoorbell v1)</a>. The idea was to send an alert to my iPhone using <a href="http://www.prowlapp.com/" target="_blank">Prowl</a> whenever someone presses the doorbell. An Arduino equipped with a WiFi shield was used to monitor the bell circuit and invoke the Prowl HTTP web service when the doorbell circuit was closed. The system worked well enough but after a couple of months it just stopped working. As far as I could tell the Opto-Isolator I was using to sense the bell push had blown. There was obviously too much current in the bell circuit for the isolator's internal LED. I decided to redesign the whole project and start again.</p>
+<p><!--more--></p>
+<p>For iDoorbell v2 I decided to introduce a number of improvements to the whole system design.</p>
+<ul>
+<li><strong>Use a current sensor</strong> to detect a change in current in the bell circuit when the button is pressed. The Bell circuit is powered by a transformer that produces AC current. The current sensor outputs a voltage on its signal line proportional to the current passing through it. This voltage can then be easily measured on an Arduino input pin. The current sensor provides complete isolation between the AC bell circuit and the simple DC Arduino circuit. The current sensor I chose was the ACS712 that is easy to pick up in a breakout board on eBay for just a few pounds.</li>
+<li><strong>Use XBee modules to create a ZigBee wireless network</strong>. Whilst the WiFly shield worked, it did not cope well with WiFi access point restarts or changes. These shields are also relatively expensive, costing around 5 or 6 times more than a regular USB wifi adapter you might use with a PC. Longer term I'm hoping to have a number of sensors around my home so I want a cheaper and more suitable way to network them. I purchased a couple of <a href="http://www.freakent.co.uk/2012/01/19/digi-xbee-zb/">XBee series 2 modules</a> along with the excellent <a href="http://shop.ciseco.co.uk/xbee-shield-v0-6-for-arduino-xino-xrf-xv-xbt-etc/" target="_blank">Ciseco XBee Arduino shield</a> and a <a href="https://www.sparkfun.com/products/8687?" target="_blank">Sparkfun XBee Explorer USB</a>.</li>
+<li><strong>Use my home Linux server as a gateway</strong> to Prowl. For iDoorbell v1, I was able to construct the correct byte arrays in code all on the Arduino to form the Prowl API HTTP call, but the programming just felt a bit too low level. It would be much easier and a probably less fragile to use a readily available HTTP Client in a higher level language on my server. This new gateway would also have to connect to the ZigBee network and be able to determine which end device was sending it data (in case I have additional ZigBee connected sensors in the future). I found Andrew Rapp's excellent <a href="http://code.google.com/p/xbee-api/">XBee-Api</a> on Google Code to implement this part of the Gateway interface.</li>
+<li><strong>Use an integration framework</strong> to manage the end points. Assuming I do end up with a number of home sensors connected to this gateway, each will require some custom logic to perform actions based on sensed data. For me this would probably be implemented in a mixture of Java, Ruby or some other scripting language. I considered using a queueing system such as RabbitMQ or MQTT to give some separation between processes but that would require dozens of simple server processes, all performing specific tasks, each consuming more and more RAM. I'd also have to figure out a convenient way to manage all these processes. Instead, I decided to use the <a title="Apache Camel" href="http://camel.apache.org/" target="_blank">Apache Camel</a> integration framework running inside the <a title="Apache ServiceMix" href="http://servicemix.apache.org/" target="_blank">Apache ServiceMix</a> service bus to manage all the integration logic.</li>
+</ul>
+<p>This is a diagram showing all the solution components and how they are connected.</p>
+<p style="text-align: center;"><a href="http://www.freakent.co.uk/2012/02/10/idoorbell-v2-using-prowl-arduino-xbee-and-acs712-current-sensor/idoorbell-v2/" rel="attachment wp-att-580"><img class="aligncenter  wp-image-580" alt="iDoorbell v2" src="http://www.freakent.co.uk/wp-content/uploads/2013/01/iDoorbell-v2.png" width="440" height="206" /></a></p>
+<p>Here's an explanation of how each component works.</p>
+<p><strong>Doorbell Sensor</strong><br />
+The Doorbell Sensor is just an ACS712 current sensor connected to an Arduino with an XBee module. The ACS712 is wired in series in the doorbell circuit and produces a voltage on the Arduino input relative to the current passing through it. On start up, the Arduino initialises the XBee radio then polls the input pin looking for a change in voltage. The current I am sensing is AC (i.e. alternating) so the when the doorbell is pressed the voltage will fluctuate around a midpoint as the current swings +ve and -ve. For my simple application I don't need to know exactly how much current is flowing, just that the voltage at the input pin, and therefore the current flowing in the doorbell circuit, has changed significantly. If a change is detected a message is sent via the XBee using the serial connection. The sensor then goes to sleep for 30 seconds to prevent additional presses from generating unnecessary messages. For debugging purposes I also have the sensor sending ping messages at regular intervals so I can check the connection is still alive.</p>
+<p><strong>ZigBee Network</strong><br />
+Digi's XBee Series 2 modules are used to create the ZigBee network. On the module connected to my Linux server, I updated it's firmware to make it run in API mode. This is a requirement of the XBee-Api library and it also means that I can determine the sender of a message from the message meta data in code. This XBee module is also configured to be the Network Coordinator. I also updated the firmware on the XBee module running on the Arduino just to be sure, but left it configured as a Router. I initially configured it as an End Device but found the module would regularly go into sleep mode and would miss bell button presses. I could have fixed this by wiring up the XBee's sleep pin to wake it up at the appropriate time but it was easier just to use the Router firmware which doesn't sleep automatically.</p>
+<p><strong>Sensor Gateway</strong><br />
+Apache ServiceMix is an OSGI service container that acts as a communication bus between services. The actual service integration is implemented using the Apache Camel integration framework. Camel comes with a large number of pre-built and highly configurable components. These components make it very easy to integrate with external services via many different technologies such as queues, over http or flat files. Components are connected together into integration flows using a straight forward XML script. Managing services is relatively straight forward using the ServiceMix console. The <a href="http://fusesource.com/products/fuse-esb-enterprise/" target="_blank">Fuse ESB Integration</a> platform from FuseSource is built using Apache ServiceMix, I found much of their documentation really helpful and much better than that on the Apache site.</p>
+<p><strong>XBee Camel Component</strong><br />
+Whilst Apache Camel comes with a lot of components that will satisfy most integration needs, it doesn't have a component to integrate with XBee devices. You could say I threw myself into the deep end when it comes to learning and using Camel, by starting with my own custom component. I quickly learned a lot about Apache Maven too as Camel heavily relies on Maven for build and dependency management.</p>
+<p><strong>Prowl Interface</strong><br />
+The Apache Camel built-in HTTP client Component was straight forward to configure to invoke the <a href="http://www.prowlapp.com/api.php" target="_blank">Prowl HTTP API</a> directly from XML. It constructs a HTTP message with the appropriate headers and body. My Prowl API key is stored as a configuration parameter within Apache Service Mix.</p>
+<p><strong>Links to my code on GitHub</strong></p>
+<ul>
+<li><a href="https://github.com/freakent/iDoorbell-v2/blob/master/idoorbell2.ino" target="_blank">Arduino Doorbell Sensor</a></li>
+<li><a href="https://github.com/freakent/xbee-component/tree/master/src/main/java/freakent/camel/component" target="_blank">Apache Camel XBEE component</a></li>
+<li><a href="https://github.com/freakent/iDoorbell-v2/blob/master/idoorbell.xml" target="_blank">Apache Camel XML script</a></li>
+</ul>
+<p><strong>Links to useful information</strong></p>
+<ul>
+<li>Running Camel as a Java application:<br />
+http://camel.apache.org/running-camel-standalone-and-have-it-keep-running.html</li>
+<li>Useful example connecting Camel to Twitter:<br />
+http://blog.brunoborges.com.br/2009/04/leverage-eip-with-apache-camel-and.html</li>
+<li>Writing your own Camel components:<br />
+http://camel.apache.org/writing-components.html<br />
+http://camel.apache.org/creating-a-new-camel-component.html<br />
+http://www.consulting-notes.com/2011/11/creating-custom-camel-component.html</li>
+</ul>

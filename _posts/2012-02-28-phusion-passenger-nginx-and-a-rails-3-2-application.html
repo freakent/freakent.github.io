@@ -1,0 +1,44 @@
+---
+layout: post
+status: publish
+published: true
+title: Phusion Passenger, Nginx and a Rails 3.2 application
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 514
+wordpress_url: http://www.freakent.co.uk/?p=514
+date: '2012-02-28 19:03:36 +0000'
+date_gmt: '2012-02-28 19:03:36 +0000'
+categories:
+- Linux
+- Ruby-on-Rails
+tags:
+- Linux
+- mod_rails
+- passenger
+- programming
+- ruby-on-rails
+- rvm
+comments: []
+---
+<p><img class="alignright" src="http://wiki.nginx.org/local/nginx-logo.png" alt="nginx" width="200" height="90" />I am just in the process of making a new Rails application live. I use RVM to manage my ruby environments and I'm currently running ruby 1.9.3. I am deploying on Nginx 1.0.11 and Phusion Passenger 3.0.11 (mod_rails/mod_rack). I followed the usual configuration instructions and restarted the nginx server. When I tried to start the application by accessing the URL in my browser I received an error saying that bundle could not be found. After a lot of trial and error I finally realised I had made a mistake in my nginx.conf file.<br />
+<!--more--><br />
+This was my original nginx.conf file. I configured this by pulling the settings from <i>rvm info</i>.<br />
+<code>http {<br />
+    passenger_root /usr/local/rvm/gems/ruby-1.9.3-p125/gems/passenger-3.0.11;<br />
+    passenger_ruby /usr/local/rvm/rubies/ruby-1.9.3-p125/bin/ruby;<br />
+...<br />
+}</code><br />
+Whilst "rubies/ruby-xxx/bin/ruby" is what rvm was telling was the path to ruby, what I should have been using is the rvm wrapper around ruby:<br />
+<code>http {<br />
+&nbsp; &nbsp; passenger_root /usr/local/rvm/gems/ruby-1.9.3-p125/gems/passenger-3.0.11;<br />
+&nbsp; &nbsp; passenger_ruby /usr/local/rvm/wrappers/ruby-1.9.3-p125/ruby;<br />
+...<br />
+}</code><br />
+Glad to say that the application started fine after I worked this out.</p>

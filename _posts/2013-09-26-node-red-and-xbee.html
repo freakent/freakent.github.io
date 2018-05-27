@@ -1,0 +1,332 @@
+---
+layout: post
+status: publish
+published: true
+title: Node-RED and XBee
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 813
+wordpress_url: http://www.freakent.co.uk/?p=813
+date: '2013-09-26 19:56:00 +0100'
+date_gmt: '2013-09-26 19:56:00 +0100'
+categories:
+- Internet of Things
+tags:
+- javascript
+- xbee
+- zigbee
+- node.js
+- node-red
+comments:
+- id: 4808
+  author: Chris Jefferies
+  author_email: chrisjx@gmail.com
+  author_url: ''
+  date: '2014-04-28 07:24:06 +0100'
+  date_gmt: '2014-04-28 07:24:06 +0100'
+  content: "I originally got the serial nodes to read all the raw data coming in on
+    my xbee series 1 radios, /dev/ttyO2:9600.  Now I've got this NR-XBee loaded but
+    sadly I don't understand how it's to be configured.\r\n\r\nThe xbee nodes are
+    available and I loaded the example flow.\r\n\r\nMy goal is to have a dozen remote
+    xbee radios transmitting 4 ADCs each and occasionally, based on some condition,
+    like LDR detects dark, send a signal back, like setting D4 to x04,to close relay
+    to turn on lamp.\r\n\r\nUsing a Beaglebone Black, UART2, /dev/ttyO2, xbee series
+    1 coordinator in api2 mode.\r\n\r\nAny tips appreciated.  Thanks,\r\nChris."
+- id: 4813
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2014-04-28 09:42:18 +0100'
+  date_gmt: '2014-04-28 09:42:18 +0100'
+  content: Chris, it should be straight forward to configure. I have Series 2 XBees
+    so your setup may have to be different. The XBee node only has two configuration
+    options, a name and the serial port. You can name it anything you like and the
+    serial port is configured in exactly the same way as the serial port node (it
+    actually uses the same code underneath). Easiest thing to do is to create a flow
+    with just the XBee node and a debug node, connecting the Xbee output to the debug
+    node.
+- id: 15116
+  author: Robb GG
+  author_email: robbgosset@bimscript.com
+  author_url: ''
+  date: '2014-10-24 13:51:52 +0100'
+  date_gmt: '2014-10-24 13:51:52 +0100'
+  content: "I've been trying to use your plugin for a server to communicate with multiple
+    xbee endpoints and I was wordering if you colud provide some help with getting
+    it working. I have the node-red flow set up to return a timestamp when it's sent
+    a message with \"Time Please\" as the payload and it should be sending a packet
+    out with a UNIX timestamp in to the endpoint but it doesn't seem to be reaching
+    it's destination and I'm not sure where to go from here. I've attached a serial
+    sniffer and data is definately being sent to the xbee from node-red but it doesn't
+    seem to be reaching the endpoint. \r\n\r\nIf you could offer any tips that would
+    be much appreciated.\r\n\r\nThanks,\r\n\r\n// Robb"
+- id: 15382
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2014-11-03 07:55:08 +0000'
+  date_gmt: '2014-11-03 07:55:08 +0000'
+  content: "Sorry flor slow reply, your comment was hidden amongst a sea of comment
+    span. \n\nIt sounds more like a connectivity issue than a node-red issue. I'd
+    connect the end point to <a href=\"http://www.digi.com/support/productdetail?pid=3352&osvid=57&type=utilities\"
+    title=\"X-CTU\" target=\"_blank\" rel=\"nofollow\">X-CTU</a> or better still both
+    the end-point and the coordinator. Have you checked your PAN ID, DH and DL settings
+    on each XBEE? What is your end point connected to?"
+- id: 15445
+  author: Robb GG
+  author_email: robbgosset@bimscript.com
+  author_url: ''
+  date: '2014-11-05 12:54:23 +0000'
+  date_gmt: '2014-11-05 12:54:23 +0000'
+  content: "Thanks for the reply, I've checked all the config of the Xbees and it
+    all looks ok, when I hooked a serial sniffer up to the DIN pin on the coordinator
+    Xbee it seemed that the packets were malformed. I can re-build the setup and get
+    some sample data if you'd like.\r\n\r\n// Robb"
+- id: 15446
+  author: Robb GG
+  author_email: robbgosset@bimscript.com
+  author_url: ''
+  date: '2014-11-05 12:55:22 +0000'
+  date_gmt: '2014-11-05 12:55:22 +0000'
+  content: Sorry about the double post, the endpoint is mean to be connected to an
+    arduino but I've got it hooked up to a computer to use for debugging at the moment.
+- id: 17401
+  author: Waldo C
+  author_email: wxc058@bham.ac.uk
+  author_url: ''
+  date: '2015-02-05 15:45:10 +0000'
+  date_gmt: '2015-02-05 15:45:10 +0000'
+  content: "Hi,\r\nI've already installed the module, and it's up and running in node-red.
+    \ However, I can't change the serial port on the node.  The \"edit\" button just
+    doesn't bring up a new dialog.\r\nHave you come across this issue before? If so,
+    do you know the workaround?\r\n\r\nThanks!"
+- id: 17431
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-02-09 20:46:27 +0000'
+  date_gmt: '2015-02-09 20:46:27 +0000'
+  content: I wonder if it is a problem with the version of Node-Red. I guess I'm still
+    using a relatively old version. Now that 10.1 is out I should think about updating
+    all my nodes to works as npms.
+- id: 17871
+  author: Chris
+  author_email: git@cescholz.de
+  author_url: http://spektel.cescholz.de
+  date: '2015-03-30 11:00:19 +0100'
+  date_gmt: '2015-03-30 11:00:19 +0100'
+  content: "Hi,\r\nI tested your method and it works! Thanks for this excellent post.
+    I now can send messages from my Arduino to node-red using the XBee Series 2 in
+    API Mode 2. But it left a few questions to me. I'm not a Javascript guy and tried
+    quite some time to display the HEX values of the payload using the DEBUG node.
+    It works (using a function node with toChar and toString(16), but only for values
+    in the ASCII range. I tried the Binary Buffer feature of the serial connection
+    as well, but with no luck.\r\nI guess, I don't understand the basic concepts of
+    node-red. Is it suitable for binary data, and where is the direction to look or
+    go?\r\nThe second question is about sending a status response, but this is for
+    later.\r\nMany thanks for any ideas or help!\r\nChris"
+- id: 18365
+  author: Waldo C
+  author_email: wcervantes@gmail.com
+  author_url: ''
+  date: '2015-04-28 14:31:19 +0100'
+  date_gmt: '2015-04-28 14:31:19 +0100'
+  content: "Hello again,\r\nI managed to get it working on node-red's latest release
+    (0.10.6).\r\nI'm using two API routers set to ATAP=2 (as per svd-xbee config instructions).\r\nHowever,
+    I'm getting an error that makes node-red to crash.\r\nI don't know if it something
+    to do my installation (i.e., a dependency problem or something missing) or the
+    configuration of my xbee devices.\r\n\r\nAny help would be much appreciated!\r\nThanks!\r\n\r\nThis
+    is the log:\r\n\r\n28 Apr 14:01:28 - About to initialise the XBee on /dev/ttyUSB0:9600...\r\n28
+    Apr 14:01:28 - [info] Started flows\r\n28 Apr 14:01:29 - XBee initialised in pool
+    -> {\"panid\":\"0000000000008888\",\"id\":\" \",\"sourceHigh\":\"0013a200\",\"sourceLow\":\"40a7XXXX\",\"nodeDiscoveryTime\":6000}\r\n28
+    Apr 14:01:29 - [info] [xbee in:myXbeeCoordinator] XBee node 0013a20040a7XXXX discovered\r\n28
+    Apr 14:01:29 - [info] [xbee in:myXbeeCoordinator] XBee node 0013a20040adXXXX discovered\r\n28
+    Apr 14:01:29 - [red] Uncaught Exception:\r\n28 Apr 14:01:29 - TypeError: Cannot
+    read property 'hex' of undefined\r\n    at Node. (/home/waldo/Desktop/node-red-0.10.6/nodes/freakent-nodes/55-xbee.js:69:63)\r\n
+    \   at Node.emit (events.js:98:17)\r\n    at Node._onDataSampleRx (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/index.js:512:8)\r\n
+    \   at SerialPort.self._onDataSampleRx (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/index.js:198:35)\r\n
+    \   at SerialPort.emit (events.js:95:17)\r\n    at Object.parser (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/lib/xbee-api.js:361:21)\r\n
+    \   at ReadStream.SerialPort.options.dataCallback (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/node_modules/serialport/serialport.js:92:13)\r\n
+    \   at ReadStream.emit (events.js:95:17)\r\n    at ReadStream. (_stream_readable.js:765:14)\r\n
+    \   at ReadStream.emit (events.js:92:17)"
+- id: 18369
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-04-28 19:48:41 +0100'
+  date_gmt: '2015-04-28 19:48:41 +0100'
+  content: "Looks like you found a typo, and (I'm ashamed to say) an untested bit
+    of code. \n\nI think line 69 should read:\nnode.log(util.format(\"IO from %s ->
+    %s\", xnode.remote64.hex, util.inspect(sample))); \n\nLet me know and I will change
+    on github."
+- id: 18370
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-04-28 19:54:29 +0100'
+  date_gmt: '2015-04-28 19:54:29 +0100'
+  content: |-
+    Hi Chris, sorry it has taken me so long to respond to your question.
+
+    Node-red doesn't have any underlying issues with Binary data, it all comes down to how you want to handle the data. I believe the DEBUG node just does a basic string conversion on the data object before printing. I my set up I was just sending regular ascii strings to the XBEE coordinator. If you want to send something else you would have to parse out msg.payload in JavaScript to get what you want.
+- id: 18371
+  author: Waldo C
+  author_email: wcervantes@gmail.com
+  author_url: ''
+  date: '2015-04-28 20:16:55 +0100'
+  date_gmt: '2015-04-28 20:16:55 +0100'
+  content: Thanks! I left all my setup back in the office, but I will test it first
+    thing tomorrow morning and let you know.
+- id: 18393
+  author: Waldo C
+  author_email: wcervantes@gmail.com
+  author_url: ''
+  date: '2015-04-29 14:09:21 +0100'
+  date_gmt: '2015-04-29 14:09:21 +0100'
+  content: "It works.\r\nThanks a lot for you help and for putting up this node!\r\nIt
+    will be very helpful for my project.\r\n\r\nbest wishes!"
+- id: 18394
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-04-29 14:12:29 +0100'
+  date_gmt: '2015-04-29 14:12:29 +0100'
+  content: Thanks for letting me know. Glad it worked for you. I have an experimental
+    version of this node updated and packaged as an NPM running on my server. When
+    I get some time I will finish testing and publish to npmjs.com. Keep an eye out
+    for it!
+- id: 18396
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-04-29 14:17:58 +0100'
+  date_gmt: '2015-04-29 14:17:58 +0100'
+  content: Waldo, which GitHub repository did you pull this node from? I want to make
+    sure I update the right one.
+- id: 18398
+  author: Waldo C
+  author_email: wcervantes@gmail.com
+  author_url: ''
+  date: '2015-04-29 17:37:00 +0100'
+  date_gmt: '2015-04-29 17:37:00 +0100'
+  content: "The one in this same page.\r\nhttps://github.com/freakent/NR-XBee.git\r\n\r\nAgain,
+    many thanks!\r\n\r\nBest wishes!"
+- id: 18415
+  author: Reece Robinson
+  author_email: Reece@TheRobinsons.gen.nz
+  author_url: ''
+  date: '2015-05-01 05:46:38 +0100'
+  date_gmt: '2015-05-01 05:46:38 +0100'
+  content: "Hi,\r\n\r\nI was hoping I could use this node to send hex formatted xbee
+    frames using this node-red component.  \r\n\r\nI can successfully send \"Hello
+    World\" text using it but I can't send an xbee frame e.g. 7E 00 10 17 01 00 13
+    A2 00 40 3B B1 BB FF FE 02 44 34 05 CF which will set D4IO to High on the associated
+    End Device.\r\n\r\nAm I missing something?"
+- id: 18416
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-05-01 06:41:34 +0100'
+  date_gmt: '2015-05-01 06:41:34 +0100'
+  content: "You are quite right, I only built support for sending strings. That was
+    all I needed for my purposes. Feel free to make the necessary changes and send
+    me a pull request :-) \n\nHow are you constructing the frames in node-red? "
+- id: 18433
+  author: Reece Robinson
+  author_email: Reece@TheRobinsons.gen.nz
+  author_url: ''
+  date: '2015-05-02 05:47:15 +0100'
+  date_gmt: '2015-05-02 05:47:15 +0100'
+  content: I have added a new node for setting the digital output state of xbee pins
+    to your code however I don't know how to create a pull request?
+- id: 18434
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-05-02 08:32:33 +0100'
+  date_gmt: '2015-05-02 08:32:33 +0100'
+  content: "Thee are some pretty simple instructions on GitHub. \nhttps://help.github.com/articles/creating-a-pull-request/"
+- id: 18439
+  author: Reece Robinson
+  author_email: Reece@TheRobinsons.gen.nz
+  author_url: ''
+  date: '2015-05-02 23:21:55 +0100'
+  date_gmt: '2015-05-02 23:21:55 +0100'
+  content: Done :-)
+- id: 18456
+  author: Renan
+  author_email: renanmrg@gmail.com
+  author_url: ''
+  date: '2015-05-04 14:10:02 +0100'
+  date_gmt: '2015-05-04 14:10:02 +0100'
+  content: "is there a new release of this project ? I ask because when running my
+    application, I got these message from the log file:\r\nnode-red-0 (err): connections
+    property is deprecated. Use getConnections() method\r\n\r\nThanks!"
+- id: 18585
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2015-05-22 09:40:59 +0100'
+  date_gmt: '2015-05-22 09:40:59 +0100'
+  content: Renan, I pushed a version up to Github at the start of the month. However
+    I am not sure where that error is coming from, there is nothing in the code of
+    this module that calls a connections property.
+- id: 23789
+  author: Mike Girdner
+  author_email: mgirdner@worthok.com
+  author_url: ''
+  date: '2016-08-21 23:09:17 +0100'
+  date_gmt: '2016-08-21 23:09:17 +0100'
+  content: I am not a Linux expert but I have played with Node Red for a while now.  I
+    tried to follow your instructions to install the XBee node but they are not showing
+    up in the Node Red left pane.  Any suggestions on what I should look for next?  Any
+    help would be appreciated.
+- id: 24878
+  author: Jos&eacute; Luiz
+  author_email: jllorenzo@terra.com.br
+  author_url: ''
+  date: '2017-03-24 22:27:59 +0000'
+  date_gmt: '2017-03-24 22:27:59 +0000'
+  content: "Hi,\r\nI am trying to send a remote AT command to a remote XBee to put
+    D5 output on HIGH.\r\nA used a function Node before XBeeOUT Node as bellow , but
+    I am receiving the error: TypeError: Object [object Object] has no method 'replace'\r\n\r\nPlease
+    Could any one give me same directions about what is wrong. I will appreciate some
+    help. \r\nThankYou and regards\r\n\r\n\r\nmsg.destination = \"0013A200406FB7C4\";\r\nmsg.topic
+    = \"REMOTE_AT_COMMAND_REQUEST\";\r\nmsg.payload = { \r\n        type: \"REMOTE_AT_COMMAND_REQUEST\",\r\n
+    \       command: \"D5\",\r\n    \tremoteCommandOptions: 0x02, \r\n\tcommandParameter:
+    [0x05]\r\n\t}; \r\nreturn msg;"
+---
+<p><a href="http://www.freakent.co.uk/wp-content/uploads/2013/09/Screen-Shot-2013-09-26-at-19.26.11.png"><img src="http://www.freakent.co.uk/wp-content/uploads/2013/09/Screen-Shot-2013-09-26-at-19.26.11.png" alt="Node-RED XBee" width="300" class="alignright size-full wp-image-817" /></a>I recently discovered a really interesting new Open Source project for integrating devices and services, it's called <a href="http://nodered.org/" target="_blank">Node-RED</a>. Sponsored by IBM, the project is built on node.js and describes itself as "A visual tool for wiring the Internet of Things". It combines a graphical design tool that runs in a web browser and a runtime execution engine. Devices and services are represented by "nodes" which are wired together using the design tool to create a "flow". Although a number of built-in nodes are provided there isn't one for integrating an XBee wireless network so I rolled up my sleeves and built one. </p>
+<p><!--more--><br />
+My XBee "node" (there are definitely too many things called "node" in this project!) communicates with the XBee network through an XBee wireless module connected to the computer's serial port. It uses the excellent <a href="https://github.com/jouz/svd-xbee" target="_blank">svd-xbee node.js module</a> to communicate with an XBee module configured as a network Coordinator, using the XBee API mode. I use the <a href="https://www.sparkfun.com/products/8687?" target="_blank">Sparkfun XBee Explorer USB</a> to connect the XBee module to my serial port. If you need information on how to configure XBee modules take a look at my earlier <a href="http://www.freakent.co.uk/tag/xbee/" target="_blank">posts</a> on XBee.</p>
+<p>To use the XBee node in your own Node-RED flow, follow these steps:</p>
+<ol>
+<li>Install node.js and Node-RED as per these <a href="http://nodered.org/docs/getting-started/installation.html" target="_blank">instructions</a>. </li>
+<li>Install svd-xbee module. Currently the XBee node depends on the latest version of svd-xbee which is only available directly from GitHub.<br />
+<code> $ npm install git+https://github.com/jouz/svd-xbee.git </code>
+</li>
+<li>Download or clone the XBee node from GitHub <a href="https://github.com/freakent/NR-XBee.git" target="_blank">https://github.com/freakent/NR-XBee.git</a><br />
+<code> $ git clone https://github.com/freakent/NR-XBee.git </code>
+</li>
+<li>Edit and run the XBee node's install script<br />
+Edit the install.sh script and change the NR_HOME variable to match the directory where you installed Node-RED. Make sure the script is executable and then run it.<br />
+<code> $ chmod +x install.sh<br />
+ $ ./install.sh<br />
+</code>
+</li>
+<li>Connect your Coordinator configured XBee module into a USB port and take note of the serial port your operating system associates it with.<br />
+On MacOS you can use<br />
+<code> $ ls /dev/tty.usb*</code></li>
+<li>Start up your Node-RED installation, as per the <a href="http://nodered.org/docs/getting-started/running.html" target="_blank">instructions here</a>.<br />
+Hopefully Node-RED will start up and you shouldn't see any error messages relating to either the Serial or XBee nodes.</li>
+<li>Check the XBee components are available in the Node-RED console<br />
+Fire up your web browser and point it at the URL given to you during Node-RED startup, typically http://127.0.0.1:1880/. The XBee node should be visible in the palette on the left as input and output nodes. You can now drag an XBee node into your flow and configure it as required.
+</ol>
+<p>Eventually Node-RED will support nodes being installed as regular npm modules so hopefully these instructions should get shorter in the future.  </p>
+<p>I now have everything I need to create v3 of my <a href="http://www.freakent.co.uk/2012/02/10/idoorbell-v2-using-prowl-arduino-xbee-and-acs712-current-sensor/">iDoorbell project</a>, replacing Apache ServiceMix with Node-RED. Node-RED is looking like a much simpler and easier to use integration solution for me. Watch this space to see how it turns out.</p>

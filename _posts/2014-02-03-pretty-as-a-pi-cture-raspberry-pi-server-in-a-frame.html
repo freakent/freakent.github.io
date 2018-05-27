@@ -1,0 +1,54 @@
+---
+layout: post
+status: publish
+published: true
+title: Pretty as a Pi-cture - Raspberry Pi Server picture frame case (phase 1)
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 879
+wordpress_url: http://www.freakent.co.uk/?p=879
+date: '2014-02-03 23:26:33 +0000'
+date_gmt: '2014-02-03 23:26:33 +0000'
+categories:
+- Gadgets
+- Internet of Things
+tags:
+- usb
+- xbee
+- raspberry pi
+- rfxtrx433
+- picture frame
+- server
+- case
+comments: []
+---
+<p><a href="http://www.freakent.co.uk/2014/02/03/pretty-as-a-pi-cture-raspberry-pi-server-in-a-frame/img_0170/" rel="attachment wp-att-880"><img class="alignright  wp-image-880" alt="IMG_0170" src="http://www.freakent.co.uk/wp-content/uploads/2014/02/IMG_0170.jpg" width="250" /></a>A couple of years ago I watched <a href="http://hak5.org/geek/building-a-photo-frame-computer-case-2">hak.5's Darren</a> build a case for his gaming rig out of a couple of IKEA picture frames. Ever since then I have been waiting for the right opportunity to do the same. A couple of months ago the motherboard failed in My Mini-ITX server so I thought I'd try replacing it with a Raspberry Pi. The Pi has been performing it's home automation duties perfectly ever since but I couldn't find a decent Raspberry Pi server case. And so the inspiration for this project began.</p>
+<p><!--more--></p>
+<p>I have a few USB peripherals hooked up to my Pi; an XBee coordinator attached to a <a href="http://proto-pic.co.uk/xbee-explorer-dongle/">XBee Explorer Dongle</a>, an <a href="http://www.rfxcom.com/store/Transceivers/12103">RFXCOM RFXtrx433</a> and a <a href="http://www.iogear.com/product/GBU521/">IOGear Bluetooth 4</a> dongle. The Pi is known to struggle to supply enough power for some USB devices so it made sense to use a powered USB hub, for which I chose a <a href="http://shop.pimoroni.com/products/pihub">PiHub</a>. I wanted all of this to go in the server case with the Pi.</p>
+<p>The overall design is pretty simple. Mount the Pi, the USB hub and the USB devices in one picture frame without the glass. Then attach the second frame with hinges on top of the first without the backing panel. I also wanted to add sockets for power and Ethernet to the bottom edge so that they can be attached/detached easily from outside the case.</p>
+<p>For phase 1 of this project I wanted to concentrate on getting everything mounted in the first frame.</p>
+<p>Here's the parts list for my Pi-cture Frame case so far:</p>
+<ul>
+<li>2 x <a href="http://www.ikea.com/gb/en/catalog/products/20078050/">IKEA RIBBA</a> 500mmx500mm deep picture frames</li>
+<li><a href="http://www.ebay.co.uk/itm/221274751326?ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">SMA Male Plug Right Angle 10cm GSM GPRS 433MHz Antenna</a></li>
+<li><a href="http://proto-pic.co.uk/panel-mount-ethernet-extension-cable/">Panel mount Ethernet extension cable</a></li>
+<li><a href="http://www.ebay.co.uk/itm/251223174617?var=550335841222&amp;ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">2.5mm Panel mount DC power socket</a></li>
+<li><a href="http://www.ebay.co.uk/itm/251223174617?var=550212196885&amp;ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">2.5mm Inline DC male plug</a></li>
+<li><a href="http://www.ebay.co.uk/itm/231125337603?ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">Short USB A to micro USB right angle cable</a></li>
+<li><a href="http://www.ebay.co.uk/itm/350939434099?ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">Short USB A to USB B cable</a></li>
+<li><a href="http://www.ebay.co.uk/itm/400281857690?var=670029379239&amp;ssPageName=STRK:MEWNX:IT&amp;_trksid=p3984.m1439.l2649">5 x M2.5x12 plastic nuts, bolts and washers</a></li>
+<li>500mm-ish double strand cable</li>
+</ul>
+<p>I spaced things out to leave me some flexibility to add other peripherals later. After all I still have one free USB port and all the Pi's GPIO pins left to play with.</p>
+<p>The M2.5x12 nuts and bots fit the Raspberry Pi's mounting holes perfectly. All I had to do was to drill appropriate holes in the backing plate to bolt them together.</p>
+<p>I used the same bolts with the PiHub but I had to dissemble it's casing to drill my own mounting holes. Two larger screwdriver sized holes in the backing board behind the casing screws make relatively easy to refit the hub's casing.</p>
+<p>It was a similar situation with the RFXCOM but it's casing is stiffly snapped on. I decided it would be too hard to use the bolts so I just looped a couple of cable ties through holes in the casing and backing board. As the RFXCOM is effectively now mounted on its side, I also replaced it's original antenna with one that has a 90 degree mount. It's not officially supported by RFXCOM but so far I haven't noticed any degradation in performance.</p>
+<p>The DC power socket was easy to fit by just drilling a suitable hole in the frame. The case was too thick to be able to use the socket's screw on retaining ring but it's a pretty tight fit without it. I soldered on some double strand cable and the inline male plug to the other end. This plugs directly into the PiHub. The 2.5mm socket is the same size as on the PiHub and it's power supply fits perfectly.</p>
+<p>The Ethernet socket cable was actually the hardest thing to fit. It's basically square shaped and alI I have is round drills. It was that NASA "square plug in a round hole" problem. The end result is not as tidy as I would have liked but it's ok if you don't look too close underneath!</p>
+<p>The whole thing in now hanging on my study wall, minus the glass front. The two antennas stick out a little too far to just use one frame. So in phase 2 I will add the glass fronted second frame onto the first frame with a set of hinges. To make it look nicer I will cover the backing board with something like dark felt. I'll also replace the long cable between the hub and RFXCOM with a shorter one. I am a little worried about ventilation so I might drill some extra large holes I the backing board which won't be visible from the front.</p>

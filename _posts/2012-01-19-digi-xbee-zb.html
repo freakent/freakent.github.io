@@ -1,0 +1,55 @@
+---
+layout: post
+status: publish
+published: true
+title: Digi XBee ZB Series 2.x
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 492
+wordpress_url: http://www.freakent.co.uk/?p=492
+date: '2012-01-19 20:34:31 +0000'
+date_gmt: '2012-01-19 20:34:31 +0000'
+categories:
+- Internet of Things
+tags:
+- Arduino
+- xbee
+- zigbee
+- ciseco
+- sparkfun
+- mqtt
+comments:
+- id: 238
+  author: iDoorbell v2 &#8211; Using Prowl, Arduino, XBee and ACS712 Current Sensor
+    &#8211; Stuff for the Easily Distracted
+  author_email: ''
+  author_url: http://www.freakent.co.uk/2012/02/10/idoorbell-v2-using-prowl-arduino-xbee-and-acs712-current-sensor/
+  date: '2013-01-10 09:09:39 +0000'
+  date_gmt: '2013-01-10 09:09:39 +0000'
+  content: "[...] around my home so I want a cheaper and more suitable way to network
+    them. I purchased a couple of XBee series 2 modules along with the excellent Ciseco
+    XBee Arduino shield and a Sparkfun XBee Explorer [...]"
+- id: 255
+  author: Look, no Arduino &#8211; XBee Sensor Network &#8211; Stuff for the Easily
+    Distracted
+  author_email: ''
+  author_url: http://www.freakent.co.uk/2013/01/20/look-no-arduino-xbee-sensor-network/
+  date: '2013-01-20 23:50:06 +0000'
+  date_gmt: '2013-01-20 23:50:06 +0000'
+  content: "[...] project (an XBEE powered rain gauge) I have been investigating how
+    to collect sensor data with just Digi XBee modules. So far all my sensor projects
+    have used an Arduino to collect data then use either WiFi or XBee to [...]"
+---
+<p><a href="http://www.digi.com"><img class="alignright" title="Digi XBee" alt="" src="http://www.digi.com/images/products/prd-xbee-modules-fam.jpg" width="200" height="200" /></a>I now have a couple of <a title="Digi XBee" href="http://www.digi.com/products/wireless-wired-embedded-solutions/zigbee-rf-modules/zigbee-mesh-module/xbee-zb-module#overview" target="_blank">Digi XBee ZB Zigbee</a> wireless modules. I really like the idea of these little wireless modules,&nbsp; compared to equivalent WiFi modules they are very low powered, cheaper and they can be used to collect simple sensor data without an Arduino.&nbsp; I can feel an iDoorbell v2 project coming along soon!</p>
+<p>There are basically two different types of Digi XBee modules available, the series 1 and the series 2 (which includes 2.5). From what I read the series 1's are much easier to work with, however I bought the latest series 2.5 ZB version not the series 1. I thought I'd share how I managed to get these little modules talking to each other.</p>
+<p><!--more--></p>
+<p>The Zigbee protocol requires at least one unit to act as a network Coordinator but out-of-the-box they both came configured as Zigbee Endpoints. It took a bit of head scratching to figure out how to make one Xbee a Coordinator. Turns out you have to download some software from Digi called <a title="X-CTU software" href="http://www.digi.com/support/productdetail?pid=3352&amp;osvid=57&amp;type=utilities" target="_blank">X-CTU</a> and use it to upload a suitable Coordinator firmware to one of the units. The X-CTU web page says that 64-bit operating systems are not supported but it works fine on my Windows 7 64-bit laptop. X-CTU is actually a really useful piece of software and makes it very easy to work with the XBees.</p>
+<p>After I uploaded a new Coordinator firmware to one of the modules they just worked. I currently have the Coordinator hooked up to a Windows PC using the <a title="XBee Explorer USB" href="http://www.sparkfun.com/products/8687" target="_blank">Sparkfun USB Explorer</a> and the endpoint sitting in a (awesome) <a title="XBee shield" href="http://shop.ciseco.co.uk/improved-xbee-shield-for-arduino-amicus-xino-xrf-x232-etc/" target="_blank">Ciseco Xbee shield</a> on the Arduino. I have a small program running on the Arduino that continually generates messages and prints them to the serial port. The messages magically appear in X-CTU on the PC.</p>
+<p>My plan now is to build a Zigbee/WiFi bridge using an Arduino, an XBee and a WiFi shield. The bridge will connect to the MQTT broker and publish received data to different topics depending on the XBee sending the message. iDoorbell v2 will use just an XBee (no Arduino required) to send a message through the bridge onto the MQTT broker where a small script will subscribe to the appropriate topic and react by sending a "there's someone at the door" message through Prowl. Very cool!</p>
+<p>&nbsp;</p>
