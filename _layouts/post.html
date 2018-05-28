@@ -1,26 +1,8 @@
 ---
 layout: default
 ---
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <h2>
-      <div class="{{ page.icon-style }} pull-left">
-        <span class="{{ page.icon }}"></span>
-      </div>
-      <div>
-      {{page.title}}
-      </div>
-    </h2>
-  </div>
-</div>
-
-<div class="container">
-{{ content }}
-</div>
-
-<div class="container">
-<p class="pull-right"><small>[<a href="{{page.id | append: ".html" | relative_url}}">link to this article</a>]</small></p>
-</div>
-
-<hr>
+<div class="blog-post">
+  <h2 class="blog-post-title">{{ page.title }}</h2>
+  <p class="blog-post-meta">{{ page.date | date_to_long_string}} by <a href="#">{{page.author.display_name}}</a></p>
+  {{ content }}
+</div><!-- /.blog-post -->

@@ -1,0 +1,18 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+---
+body {
+  margin-top: 100px;
+}
+
+.navbar-brand small {
+  display:block;
+  font-size:12px;
+}
+
+.alignright {
+	float:right;
+	margin-left:1em;
+	margin-bottom:1em;
+}
