@@ -7,6 +7,17 @@ layout: default
   {{ content }}
 </div><!-- /.blog-post -->
 
+{% if site.data.comments[page.slug] %}
+
+  {% assign comments = site.data.comments[page.slug] | sort  %}
+  {% for comments_page in comments %}
+    {% assign comment = comments_page[1] %}
+<p>  {{ comment.name }} </p>
+<p>  {{ comment.date }}</p>
+  <p>{{ comment.message }}</p>
+  {% endfor %}
+{% endif %}
+
 <form method="POST" action="https://api.staticman.net/v2/entry/freakent/freakent.github.io/master/comments">
   <input name="options[redirect]" type="hidden" value="{{ page.url | absolute_url }}">
   <!-- e.g. "2016-01-02-this-is-a-post" -->
