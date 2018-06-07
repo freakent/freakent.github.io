@@ -1,0 +1,18 @@
+---
+_id: 24878
+replying_to: ''
+name: Jos&eacute; Luiz
+email: 4f1c8d69917e387a7eb17dc5412a9f3f
+url: ''
+message: "Hi,\r\nI am trying to send a remote AT command to a remote XBee to put D5
+  output on HIGH.\r\nA used a function Node before XBeeOUT Node as bellow , but I
+  am receiving the error: TypeError: Object [object Object] has no method 'replace'\r\n\r\nPlease
+  Could any one give me same directions about what is wrong. I will appreciate some
+  help. \r\nThankYou and regards\r\n\r\n\r\nmsg.destination = \"0013A200406FB7C4\";\r\nmsg.topic
+  = \"REMOTE_AT_COMMAND_REQUEST\";\r\nmsg.payload = { \r\n        type: \"REMOTE_AT_COMMAND_REQUEST\",\r\n
+  \       command: \"D5\",\r\n    \tremoteCommandOptions: 0x02, \r\n\tcommandParameter:
+  [0x05]\r\n\t}; \r\nreturn msg;"
+date: 1490394479
+date_rfc2822: Fri, 24 Mar 2017 22:27:59 +0000
+type: comment
+layout: post

@@ -1,0 +1,14 @@
+---
+_id: 18394
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: Thanks for letting me know. Glad it worked for you. I have an experimental
+  version of this node updated and packaged as an NPM running on my server. When I
+  get some time I will finish testing and publish to npmjs.com. Keep an eye out for
+  it!
+date: 1430313149
+date_rfc2822: Wed, 29 Apr 2015 14:12:29 +0100
+type: comment
+layout: post

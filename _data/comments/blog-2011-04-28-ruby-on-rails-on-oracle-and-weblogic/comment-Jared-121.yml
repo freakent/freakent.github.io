@@ -1,0 +1,17 @@
+---
+_id: 121
+replying_to: ''
+name: Jared
+email: 73764bb70c1ed3916bcc10643ed4edb2
+url: ''
+message: "Thanks Martin.  I ended up finally booting up the Rails app in Weblogic.
+  \ \r\n\r\nI used the following gem combo: \r\n- jruby-rack 1.0.2\r\n- jruby-jars
+  1.5.1\r\n- warbler 1.2.1\r\n\r\nThe error was in Rack - I have a feeling the current
+  Jruby rack was wrong:  as mentioned above the latest one really wanted a rackup
+  file, which warbler didn't include by default.  And with it, I would then receive
+  gem dependency errors.  Using the above combo of gems, it ran with default settings
+  straight out of the box.  I'm attempting to push it to jruby 1.6 though!\r\n\r\nCheers\r\nJared"
+date: 1330362086
+date_rfc2822: Mon, 27 Feb 2012 17:01:26 +0000
+type: comment
+layout: post

@@ -1,0 +1,13 @@
+---
+_id: 18456
+replying_to: ''
+name: Renan
+email: 45affa4401279f7809e07e8da3aca36b
+url: ''
+message: "is there a new release of this project ? I ask because when running my application,
+  I got these message from the log file:\r\nnode-red-0 (err): connections property
+  is deprecated. Use getConnections() method\r\n\r\nThanks!"
+date: 1430745002
+date_rfc2822: Mon, 04 May 2015 14:10:02 +0100
+type: comment
+layout: post

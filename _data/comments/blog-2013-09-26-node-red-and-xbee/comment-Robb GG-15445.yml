@@ -1,0 +1,14 @@
+---
+_id: 15445
+replying_to: ''
+name: Robb GG
+email: cfd9f17ed1bb0e3bd97a0aedc3168639
+url: ''
+message: "Thanks for the reply, I've checked all the config of the Xbees and it all
+  looks ok, when I hooked a serial sniffer up to the DIN pin on the coordinator Xbee
+  it seemed that the packets were malformed. I can re-build the setup and get some
+  sample data if you'd like.\r\n\r\n// Robb"
+date: 1415192063
+date_rfc2822: Wed, 05 Nov 2014 12:54:23 +0000
+type: comment
+layout: post

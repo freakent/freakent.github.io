@@ -1,0 +1,13 @@
+---
+_id: 24
+replying_to: ''
+name: Martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: |-
+  Stuart Cheshire popped up on my Ipod today in a Podcast recorded by IT Conversations. There is now a plug in for Asterisk, the open source PBX, to automatically configure SIP clients. This is a very cool application for Bonjour. Bonjour could basically enable seamless VOIP roaming between networks. This may be the application that finally gives Bonjour the accolade it deserves. Listen to Stuart here:
+  http://www.itconversations.com/shows/detail1711.html
+date: 1183491669
+date_rfc2822: Tue, 03 Jul 2007 20:41:09 +0100
+type: comment
+layout: post

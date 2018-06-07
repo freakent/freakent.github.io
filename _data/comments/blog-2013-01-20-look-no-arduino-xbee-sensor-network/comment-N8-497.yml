@@ -1,0 +1,12 @@
+---
+_id: 497
+replying_to: ''
+name: N8
+email: 23462c992af8a8afecee38c1f08d49d7
+url: ''
+message: 'According to DigiKey, you should not apply more than 3.3V to any input :
+  http://www.digi.com/support/kbase/kbaseresultdetl?id=2160 , so yeah dumb luck ;-)'
+date: 1366650259
+date_rfc2822: Mon, 22 Apr 2013 18:04:19 +0100
+type: comment
+layout: post

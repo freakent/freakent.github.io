@@ -1,0 +1,16 @@
+---
+_id: 15382
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: "Sorry flor slow reply, your comment was hidden amongst a sea of comment
+  span. \n\nIt sounds more like a connectivity issue than a node-red issue. I'd connect
+  the end point to <a href=\"http://www.digi.com/support/productdetail?pid=3352&osvid=57&type=utilities\"
+  title=\"X-CTU\" target=\"_blank\" rel=\"nofollow\">X-CTU</a> or better still both
+  the end-point and the coordinator. Have you checked your PAN ID, DH and DL settings
+  on each XBEE? What is your end point connected to?"
+date: 1415001308
+date_rfc2822: Mon, 03 Nov 2014 07:55:08 +0000
+type: comment
+layout: post

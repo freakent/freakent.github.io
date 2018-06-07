@@ -1,0 +1,13 @@
+---
+_id: 17431
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: I wonder if it is a problem with the version of Node-Red. I guess I'm still
+  using a relatively old version. Now that 10.1 is out I should think about updating
+  all my nodes to works as npms.
+date: 1423514787
+date_rfc2822: Mon, 09 Feb 2015 20:46:27 +0000
+type: comment
+layout: post

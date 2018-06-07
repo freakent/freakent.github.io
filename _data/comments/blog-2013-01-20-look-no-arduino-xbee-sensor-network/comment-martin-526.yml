@@ -1,0 +1,13 @@
+---
+_id: 526
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: N8, you are absolutely right. I was using a variable power supply and it
+  turns out I had it set at 3.3V instead of 5V, hence no damage. I will update the
+  diagrams to use of the regulated 3.3V output into the switch.
+date: 1370066757
+date_rfc2822: Sat, 01 Jun 2013 07:05:57 +0100
+type: comment
+layout: post

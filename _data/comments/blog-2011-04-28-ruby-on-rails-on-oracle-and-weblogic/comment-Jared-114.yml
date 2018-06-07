@@ -1,0 +1,19 @@
+---
+_id: 114
+replying_to: ''
+name: Jared
+email: 73764bb70c1ed3916bcc10643ed4edb2
+url: ''
+message: "I don't suppose you know which version of Warbler you used here?  \r\n\r\nI
+  cannot for the life of me get a rails app to boot up on my client's WebLogic.  Current
+  warbler is 1.3.2 (containing jruby-core-1.6.6, jruby-rack-1.1.3)\r\n\r\nThe WebLogic
+  my client has is 10.3.0.0 - I'm not sure if this version is an issue.  The WAR file
+  does not include a rackup / config.ru file when building.  If I leave it out it
+  doesn't boot up.  If I manually put it in, I get rack errors that it can't find
+  any gem files.  \r\n\r\nI'd like to try a version of warbler you tried - if you
+  know this I will compare the versions to see if something went wrong here.\r\n\r\nMany
+  thanks"
+date: 1329763120
+date_rfc2822: Mon, 20 Feb 2012 18:38:40 +0000
+type: comment
+layout: post

@@ -1,0 +1,28 @@
+---
+_id: 18365
+replying_to: ''
+name: Waldo C
+email: 872c19efbf4f6d0563d02f6838db0d98
+url: ''
+message: "Hello again,\r\nI managed to get it working on node-red's latest release
+  (0.10.6).\r\nI'm using two API routers set to ATAP=2 (as per svd-xbee config instructions).\r\nHowever,
+  I'm getting an error that makes node-red to crash.\r\nI don't know if it something
+  to do my installation (i.e., a dependency problem or something missing) or the configuration
+  of my xbee devices.\r\n\r\nAny help would be much appreciated!\r\nThanks!\r\n\r\nThis
+  is the log:\r\n\r\n28 Apr 14:01:28 - About to initialise the XBee on /dev/ttyUSB0:9600...\r\n28
+  Apr 14:01:28 - [info] Started flows\r\n28 Apr 14:01:29 - XBee initialised in pool
+  -> {\"panid\":\"0000000000008888\",\"id\":\" \",\"sourceHigh\":\"0013a200\",\"sourceLow\":\"40a7XXXX\",\"nodeDiscoveryTime\":6000}\r\n28
+  Apr 14:01:29 - [info] [xbee in:myXbeeCoordinator] XBee node 0013a20040a7XXXX discovered\r\n28
+  Apr 14:01:29 - [info] [xbee in:myXbeeCoordinator] XBee node 0013a20040adXXXX discovered\r\n28
+  Apr 14:01:29 - [red] Uncaught Exception:\r\n28 Apr 14:01:29 - TypeError: Cannot
+  read property 'hex' of undefined\r\n    at Node. (/home/waldo/Desktop/node-red-0.10.6/nodes/freakent-nodes/55-xbee.js:69:63)\r\n
+  \   at Node.emit (events.js:98:17)\r\n    at Node._onDataSampleRx (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/index.js:512:8)\r\n
+  \   at SerialPort.self._onDataSampleRx (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/index.js:198:35)\r\n
+  \   at SerialPort.emit (events.js:95:17)\r\n    at Object.parser (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/lib/xbee-api.js:361:21)\r\n
+  \   at ReadStream.SerialPort.options.dataCallback (/home/waldo/Desktop/node-red-0.10.6/node_modules/svd-xbee/node_modules/serialport/serialport.js:92:13)\r\n
+  \   at ReadStream.emit (events.js:95:17)\r\n    at ReadStream. (_stream_readable.js:765:14)\r\n
+  \   at ReadStream.emit (events.js:92:17)"
+date: 1430227879
+date_rfc2822: Tue, 28 Apr 2015 14:31:19 +0100
+type: comment
+layout: post

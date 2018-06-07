@@ -1,0 +1,14 @@
+---
+_id: 17401
+replying_to: ''
+name: Waldo C
+email: 3eac71b127674b0731043044effb20ba
+url: ''
+message: "Hi,\r\nI've already installed the module, and it's up and running in node-red.
+  \ However, I can't change the serial port on the node.  The \"edit\" button just
+  doesn't bring up a new dialog.\r\nHave you come across this issue before? If so,
+  do you know the workaround?\r\n\r\nThanks!"
+date: 1423151110
+date_rfc2822: Thu, 05 Feb 2015 15:45:10 +0000
+type: comment
+layout: post

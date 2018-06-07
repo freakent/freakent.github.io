@@ -1,0 +1,28 @@
+---
+_id: 26
+replying_to: ''
+name: Martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: |-
+  Install on Redhat EL5 and CentOS 5.3:
+
+  Either download the source and compile with :
+  # ./configure
+  # make
+  # make install
+
+  or
+
+  Google for "nss-mdns rpm redhat". I found nss-mdns-0.10-2.el5.i386.rpm downloadable from atrpms.net.
+  As root:
+  # yum install nss-mdns*.rpm
+
+  Lastly, edit the nsswitch.conf file to tell the OS to use Bonjour in its DNS lookups.
+  # vi /etc/nsswitch.conf
+  replace hosts line with:
+  hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4
+date: 1220438882
+date_rfc2822: Wed, 03 Sep 2008 11:48:02 +0100
+type: comment
+layout: post

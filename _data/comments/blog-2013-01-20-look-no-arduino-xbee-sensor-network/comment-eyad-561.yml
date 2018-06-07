@@ -1,0 +1,14 @@
+---
+_id: 561
+replying_to: ''
+name: eyad
+email: '0925ffaf2a2c1d91be1c60c7598f5ed1'
+url: ''
+message: in your project you transferred the digital input pin status of the router
+  to the coordinator then read it through x-ctu , my question is can you directly
+  transfer the digital input on the router digital input pin directly to a digital
+  output pin of the coordinator ?
+date: 1371716734
+date_rfc2822: Thu, 20 Jun 2013 09:25:34 +0100
+type: comment
+layout: post

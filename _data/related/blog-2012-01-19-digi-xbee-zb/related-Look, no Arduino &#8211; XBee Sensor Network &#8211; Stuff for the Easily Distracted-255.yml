@@ -1,0 +1,13 @@
+---
+_id: 255
+replying_to: ''
+name: Look, no Arduino &#8211; XBee Sensor Network &#8211; Stuff for the Easily Distracted
+email: d41d8cd98f00b204e9800998ecf8427e
+url: http://www.freakent.co.uk/2013/01/20/look-no-arduino-xbee-sensor-network/
+message: "[...] project (an XBEE powered rain gauge) I have been investigating how
+  to collect sensor data with just Digi XBee modules. So far all my sensor projects
+  have used an Arduino to collect data then use either WiFi or XBee to [...]"
+date: 1358725806
+date_rfc2822: Sun, 20 Jan 2013 23:50:06 +0000
+type: comment
+layout: post

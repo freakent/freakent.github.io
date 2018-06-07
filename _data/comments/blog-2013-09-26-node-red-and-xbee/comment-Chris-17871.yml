@@ -1,0 +1,20 @@
+---
+_id: 17871
+replying_to: ''
+name: Chris
+email: d8adc179986bc1c8fde506b350b59fae
+url: http://spektel.cescholz.de
+message: "Hi,\r\nI tested your method and it works! Thanks for this excellent post.
+  I now can send messages from my Arduino to node-red using the XBee Series 2 in API
+  Mode 2. But it left a few questions to me. I'm not a Javascript guy and tried quite
+  some time to display the HEX values of the payload using the DEBUG node. It works
+  (using a function node with toChar and toString(16), but only for values in the
+  ASCII range. I tried the Binary Buffer feature of the serial connection as well,
+  but with no luck.\r\nI guess, I don't understand the basic concepts of node-red.
+  Is it suitable for binary data, and where is the direction to look or go?\r\nThe
+  second question is about sending a status response, but this is for later.\r\nMany
+  thanks for any ideas or help!\r\nChris"
+date: 1427709619
+date_rfc2822: Mon, 30 Mar 2015 11:00:19 +0100
+type: comment
+layout: post

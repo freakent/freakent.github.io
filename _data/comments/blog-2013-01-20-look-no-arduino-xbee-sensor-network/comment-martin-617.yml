@@ -1,0 +1,14 @@
+---
+_id: 617
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: Johann, that's not how I am using the S2 XBee's. The receiving XBee (the
+  coordinator) is being accessed through external software via the API. I think the
+  S1 XBee's might support what you are expecting. If you monitor the receiver using
+  the X-CTU software you should see data messages being received.
+date: 1376856496
+date_rfc2822: Sun, 18 Aug 2013 21:08:16 +0100
+type: comment
+layout: post

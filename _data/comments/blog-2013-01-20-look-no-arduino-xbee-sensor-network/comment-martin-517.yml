@@ -1,0 +1,13 @@
+---
+_id: 517
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: As I said in my blog, the only parameter I had to change on the coordinator
+  was the PAN ID. I recommend re-flashing the firmware to the latest, which should
+  also reset everything to defaults, and then just setting the PAN ID.
+date: 1369642210
+date_rfc2822: Mon, 27 May 2013 09:10:10 +0100
+type: comment
+layout: post

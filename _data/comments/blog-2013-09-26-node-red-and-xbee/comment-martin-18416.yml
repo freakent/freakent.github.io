@@ -1,0 +1,13 @@
+---
+_id: 18416
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: "You are quite right, I only built support for sending strings. That was
+  all I needed for my purposes. Feel free to make the necessary changes and send me
+  a pull request :-) \n\nHow are you constructing the frames in node-red? "
+date: 1430458894
+date_rfc2822: Fri, 01 May 2015 06:41:34 +0100
+type: comment
+layout: post

@@ -1,0 +1,16 @@
+---
+_id: 4813
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: Chris, it should be straight forward to configure. I have Series 2 XBees
+  so your setup may have to be different. The XBee node only has two configuration
+  options, a name and the serial port. You can name it anything you like and the serial
+  port is configured in exactly the same way as the serial port node (it actually
+  uses the same code underneath). Easiest thing to do is to create a flow with just
+  the XBee node and a debug node, connecting the Xbee output to the debug node.
+date: 1398674538
+date_rfc2822: Mon, 28 Apr 2014 09:42:18 +0100
+type: comment
+layout: post

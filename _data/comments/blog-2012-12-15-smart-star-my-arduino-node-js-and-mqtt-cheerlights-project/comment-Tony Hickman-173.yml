@@ -1,0 +1,13 @@
+---
+_id: 173
+replying_to: ''
+name: Tony Hickman
+email: 85cb9dcfaa4e7866afa180fdc287f440
+url: https://www.ibm.com/developerworks/mydeveloperworks/blogs/hickmat/?lang=en
+message: Very cool - I've been playing with something similar using my Raspberry PI
+  so I'll re-use your Node.js code to give me a jump start on the twitter integration.  I've
+  already got the GPIO bridged to MQTT so joining things up should be simple
+date: 1355734169
+date_rfc2822: Mon, 17 Dec 2012 08:49:29 +0000
+type: comment
+layout: post

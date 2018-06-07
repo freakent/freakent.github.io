@@ -1,0 +1,13 @@
+---
+_id: 185
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: If you can't get sugar to work on the Pi you'll just have use a for loop
+  and a bit of substring'ing to parse the Twitter message. Although I'm surprised
+  sugar didn't work for you.
+date: 1355956438
+date_rfc2822: Wed, 19 Dec 2012 22:33:58 +0000
+type: comment
+layout: post

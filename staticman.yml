@@ -25,8 +25,8 @@ comments:
   # (*) REQUIRED
   #
   # Destination path (filename) for the data files. Accepts placeholders.
-  filename: "comment-{@timestamp}-{fields.name-slug}"
-  path: "_data/comments/{options.slug}"
+  filename: "comment-{@id}-{fields.name-slug}"
+  path: "_data/comments/{options.page-id-slug}"
 
   # The format of the generated data files. Accepted values are "json", "yaml"
   # or "frontmatter"
@@ -45,6 +45,10 @@ comments:
       type: slugify
       options:
         field: name
+    page-id-slug:
+      type: slugify
+      options:
+        field: page-id 
 
   # Whether entries need to be appproved before they are published to the main
   # branch. If set to `true`, a pull request will be created for your approval.

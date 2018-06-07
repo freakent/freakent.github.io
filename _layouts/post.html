@@ -7,21 +7,31 @@ layout: default
   {{ content }}
 </div><!-- /.blog-post -->
 
-{% if site.data.comments[page.slug] %}
+{% assign page_id_slug = page.id | slugify %}
 
-  {% assign comments = site.data.comments[page.slug] | sort  %}
-  {% for comments_page in comments %}
-    {% assign comment = comments_page[1] %}
+{% if site.data.comments[page_id_slug] %}
+
+  {% assign comments = "" | split: "," %}
+  {% for kv in site.data.comments[page_id_slug] %}
+    {% assign comments = comments | push: kv[1] %}
+  {% endfor %}
+
+  {% assign comments = comments | sort: "date" %}
+
+  {% for comment in comments %}
+    <img src="https://www.gravatar.com/avatar/{{ comment.email}}">
 <p>  {{ comment.name }} </p>
-<p>  {{ comment.date }}</p>
+<p>  {{ comment.date | date_to_long_string }}</p>
   <p>{{ comment.message }}</p>
   {% endfor %}
+
 {% endif %}
 
 <form method="POST" action="https://api.staticman.net/v2/entry/freakent/freakent.github.io/master/comments">
   <input name="options[redirect]" type="hidden" value="{{ page.url | absolute_url }}">
   <!-- e.g. "2016-01-02-this-is-a-post" -->
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
+  <input name="options[page-id]" type="hidden" value="{{ page.id }}">
   <label><input name="fields[name]" type="text">Name</label>
   <label><input name="fields[email]" type="email">E-mail</label>
   <label><textarea name="fields[message]"></textarea>Message</label>

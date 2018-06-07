@@ -1,0 +1,14 @@
+---
+_id: 18370
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: |-
+  Hi Chris, sorry it has taken me so long to respond to your question.
+
+  Node-red doesn't have any underlying issues with Binary data, it all comes down to how you want to handle the data. I believe the DEBUG node just does a basic string conversion on the data object before printing. I my set up I was just sending regular ascii strings to the XBEE coordinator. If you want to send something else you would have to parse out msg.payload in JavaScript to get what you want.
+date: 1430247269
+date_rfc2822: Tue, 28 Apr 2015 19:54:29 +0100
+type: comment
+layout: post

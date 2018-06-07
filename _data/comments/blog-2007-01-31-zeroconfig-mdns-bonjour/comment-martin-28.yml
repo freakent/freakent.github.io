@@ -1,0 +1,20 @@
+---
+_id: 28
+replying_to: ''
+name: martin
+email: c68790bb3df599feec65da468ff8cc5a
+url: ''
+message: |-
+  New install of CentOS 5.5 and still no easy way of getting nss-mdns installed. Googled around again a discovered that it is available from the EPEL repository (http://fedoraproject.org/wiki/EPEL/FAQ).
+
+  To add EPEL to your list of Yum repositories,
+  $ sudo rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+
+  Then install nss-mdns like so,
+  $ sudo yum install nss-mdns
+
+  That's it!
+date: 1287662101
+date_rfc2822: Thu, 21 Oct 2010 12:55:01 +0100
+type: comment
+layout: post

@@ -1,0 +1,14 @@
+---
+_id: 496
+replying_to: ''
+name: N8
+email: 23462c992af8a8afecee38c1f08d49d7
+url: ''
+message: "Ha, I guess just dumb luck then. It' not clear if you had skipped the LED
+  and you pumped 5V into XBee DI pins expecting 3.3V if you would have done some damage.\r\n\r\nBTW:
+  Much thanks for writing this up, the information about the API frame gave me a big
+  head start on a remote control project that I am working on."
+date: 1366649191
+date_rfc2822: Mon, 22 Apr 2013 17:46:31 +0100
+type: comment
+layout: post

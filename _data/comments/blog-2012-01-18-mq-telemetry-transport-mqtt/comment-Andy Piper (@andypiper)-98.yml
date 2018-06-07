@@ -1,0 +1,14 @@
+---
+_id: 98
+replying_to: ''
+name: Andy Piper (@andypiper)
+email: 1526dcb784188b422544c6344ef223c2
+url: http://andypiper.co.uk
+message: Glad the interview caught your interest :-) there are plenty of different
+  implementations around now - and lots of folks using MQTT in their home projects
+  with e.g. Arduino, mbed, Nanode and Netduino! Do join the mailing list and check
+  out mqtt.org/get-involved :-)
+date: 1326975380
+date_rfc2822: Thu, 19 Jan 2012 12:16:20 +0000
+type: comment
+layout: post

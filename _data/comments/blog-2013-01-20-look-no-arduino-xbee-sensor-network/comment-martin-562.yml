@@ -1,0 +1,13 @@
+---
+_id: 562
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: I don't believe so, not without a micro-controller or another computer connected
+  to the coordinator to parse the message from the router. Maybe that Series 1 XBee
+  have this feature.
+date: 1371721656
+date_rfc2822: Thu, 20 Jun 2013 10:47:36 +0100
+type: comment
+layout: post

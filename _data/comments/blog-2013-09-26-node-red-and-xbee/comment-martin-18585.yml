@@ -1,0 +1,13 @@
+---
+_id: 18585
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: Renan, I pushed a version up to Github at the start of the month. However
+  I am not sure where that error is coming from, there is nothing in the code of this
+  module that calls a connections property.
+date: 1432284059
+date_rfc2822: Fri, 22 May 2015 09:40:59 +0100
+type: comment
+layout: post

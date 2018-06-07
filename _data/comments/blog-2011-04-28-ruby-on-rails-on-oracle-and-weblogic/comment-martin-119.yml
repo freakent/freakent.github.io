@@ -1,0 +1,14 @@
+---
+_id: 119
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: Hi Jared, I can't be exactly sure which version of the Warbler gem I used,
+  I have both 1.3.0 and 1.2.1 on my system.  I also have jruby-rack 1.0.8 and 1.0.7
+  with jruby-1.6.0. I hope that is of some help. What errors are you getting in your
+  log file? Is Weblogic even trying to start the Rails app?
+date: 1330345685
+date_rfc2822: Mon, 27 Feb 2012 12:28:05 +0000
+type: comment
+layout: post

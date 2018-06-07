@@ -1,0 +1,19 @@
+---
+_id: 15116
+replying_to: ''
+name: Robb GG
+email: cfd9f17ed1bb0e3bd97a0aedc3168639
+url: ''
+message: "I've been trying to use your plugin for a server to communicate with multiple
+  xbee endpoints and I was wordering if you colud provide some help with getting it
+  working. I have the node-red flow set up to return a timestamp when it's sent a
+  message with \"Time Please\" as the payload and it should be sending a packet out
+  with a UNIX timestamp in to the endpoint but it doesn't seem to be reaching it's
+  destination and I'm not sure where to go from here. I've attached a serial sniffer
+  and data is definately being sent to the xbee from node-red but it doesn't seem
+  to be reaching the endpoint. \r\n\r\nIf you could offer any tips that would be much
+  appreciated.\r\n\r\nThanks,\r\n\r\n// Robb"
+date: 1414155112
+date_rfc2822: Fri, 24 Oct 2014 13:51:52 +0100
+type: comment
+layout: post

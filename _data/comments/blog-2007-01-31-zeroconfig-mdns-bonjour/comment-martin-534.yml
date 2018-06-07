@@ -1,0 +1,13 @@
+---
+_id: 534
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: "Same problem on EL6 (Oracle Enterprise Linux 6.3 in this case).\r\n\r\n$
+  sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm\r\n$
+  sudo yum install nss-mdns\r\n\r\nSee the EPEL FAQ here:  http://fedoraproject.org/wiki/EPEL/FAQ#How_can_I_install_the_packages_from_the_EPEL_software_repository.3F"
+date: 1370586340
+date_rfc2822: Fri, 07 Jun 2013 07:25:40 +0100
+type: comment
+layout: post

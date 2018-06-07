@@ -1,0 +1,14 @@
+---
+_id: 8130
+replying_to: ''
+name: Camilo
+email: 8281fe3b7ec041de6c6c02c402612880
+url: ''
+message: "hello \r\nI was looking for an example like this to xbee s2, but only found
+  for s1, thanks. \r\nCan you do the same for an analog signal (without microcontroller)?
+  Is enough to set analog input to enable DIO ? or should I make other changes? Is
+  it true, that the analog input must not exceed 1.2V? Thank you."
+date: 1403229885
+date_rfc2822: Fri, 20 Jun 2014 03:04:45 +0100
+type: comment
+layout: post

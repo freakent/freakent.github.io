@@ -1,0 +1,18 @@
+---
+_id: 183
+replying_to: ''
+name: Robin Laur&eacute;n
+email: ce71055f28f406d5491e1e8d62a6f49e
+url: http://Robin.Lauren.fi
+message: "How nifty! \r\n\r\nI'm considering to implement my own Cheerlight using
+  a BlinkM and some other bits and bobs i haven't really identified yet. Perhaps an
+  Arduino nano + an Ethernet module, or perhaps a TP-Link TP-WR703n with an Arduino.
+  Or something. Having been bitten by the MQTT bug, i too thought MQTT would be the
+  perfect transport protocol.\r\n\r\nI don't suppose you would allow worldwide read
+  (subscribe) access to your MQTT server? On the other hand, maybe it would be a good
+  excercise for me to set up a Node.js server on my other Pi. If it runs on such minimal
+  hardware."
+date: 1355943530
+date_rfc2822: Wed, 19 Dec 2012 18:58:50 +0000
+type: comment
+layout: post

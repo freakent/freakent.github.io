@@ -1,0 +1,15 @@
+---
+_id: 25
+replying_to: ''
+name: Martin (Admin)
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: |-
+  Install on Ubuntu 704 Server:
+  $sudo apt-get install libnss-mdns
+
+  This will install, configure and start the avahi-daemon process. It will also edit /etc/nsswitch.conf to include mdns in name resolution.
+date: 1189590295
+date_rfc2822: Wed, 12 Sep 2007 10:44:55 +0100
+type: comment
+layout: post

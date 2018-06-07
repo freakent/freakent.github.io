@@ -22,7 +22,7 @@ site.collections['posts'].docs.each do |post|
 
     post.data["comments"].each do |comment|
       #puts comment["author_url"]
-      if /^http.*:\/\/(www|blog).freakent.co.uk\/.*$/.match(comment["author_url"]) == nil
+      if /^http.*:\/\/(www|blog).freakent.co.uk\/.*$/.match(comment["author_url"]) != nil
         puts "Processing #{comment["author"]} #{comment["author_url"]}"
         date = Time.parse(comment["date"])
         email_digest = Digest::MD5.hexdigest comment["author_email"].downcase
@@ -44,9 +44,8 @@ site.collections['posts'].docs.each do |post|
         #puts data.inspect
         #puts "   "
         puts "*** #{post.id} #{Jekyll::Utils.slugify(post.id)} ***"
-        date_dmy = post.data["date"].strftime("%Y-%m-%d")
-        path = "_data/comments/#{Jekyll::Utils.slugify(post.id)}"
-        file_name = "comment-#{comment["author"]}-#{comment["id"]}.yml"
+        path = "_data/related/#{Jekyll::Utils.slugify(post.id)}"
+        file_name = "related-#{comment["author"]}-#{comment["id"]}.yml"
         FileUtils::mkdir_p path unless File.directory? path
         File.open(path + '/' + file_name, 'w') {|f| f.write data.to_yaml }
       else

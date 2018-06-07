@@ -1,0 +1,18 @@
+---
+_id: 4808
+replying_to: ''
+name: Chris Jefferies
+email: dc251785a66b83e4af3382eaae6b7a37
+url: ''
+message: "I originally got the serial nodes to read all the raw data coming in on
+  my xbee series 1 radios, /dev/ttyO2:9600.  Now I've got this NR-XBee loaded but
+  sadly I don't understand how it's to be configured.\r\n\r\nThe xbee nodes are available
+  and I loaded the example flow.\r\n\r\nMy goal is to have a dozen remote xbee radios
+  transmitting 4 ADCs each and occasionally, based on some condition, like LDR detects
+  dark, send a signal back, like setting D4 to x04,to close relay to turn on lamp.\r\n\r\nUsing
+  a Beaglebone Black, UART2, /dev/ttyO2, xbee series 1 coordinator in api2 mode.\r\n\r\nAny
+  tips appreciated.  Thanks,\r\nChris."
+date: 1398666246
+date_rfc2822: Mon, 28 Apr 2014 07:24:06 +0100
+type: comment
+layout: post

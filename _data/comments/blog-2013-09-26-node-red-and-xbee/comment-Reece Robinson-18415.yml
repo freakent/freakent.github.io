@@ -1,0 +1,15 @@
+---
+_id: 18415
+replying_to: ''
+name: Reece Robinson
+email: f9ddf51dad5de0cbea545d027040036d
+url: ''
+message: "Hi,\r\n\r\nI was hoping I could use this node to send hex formatted xbee
+  frames using this node-red component.  \r\n\r\nI can successfully send \"Hello World\"
+  text using it but I can't send an xbee frame e.g. 7E 00 10 17 01 00 13 A2 00 40
+  3B B1 BB FF FE 02 44 34 05 CF which will set D4IO to High on the associated End
+  Device.\r\n\r\nAm I missing something?"
+date: 1430455598
+date_rfc2822: Fri, 01 May 2015 05:46:38 +0100
+type: comment
+layout: post

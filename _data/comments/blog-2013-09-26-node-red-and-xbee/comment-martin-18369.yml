@@ -1,0 +1,14 @@
+---
+_id: 18369
+replying_to: ''
+name: martin
+email: fcc58ec3fcec662fdd081cb72475c079
+url: http://www.freakent.co.uk
+message: "Looks like you found a typo, and (I'm ashamed to say) an untested bit of
+  code. \n\nI think line 69 should read:\nnode.log(util.format(\"IO from %s -> %s\",
+  xnode.remote64.hex, util.inspect(sample))); \n\nLet me know and I will change on
+  github."
+date: 1430246921
+date_rfc2822: Tue, 28 Apr 2015 19:48:41 +0100
+type: comment
+layout: post
