@@ -20,13 +20,13 @@ comments:
   branch: "master"
 
   # Text to use as the commit message or pull request title. Accepts placeholders.
-  commitMessage: "Comment on blog {fields.page_id} by {fields.name} [Staticman]"
+  commitMessage: "Comment on {fields.page_id} by {fields.name} [Staticman]"
 
   # (*) REQUIRED
   #
   # Destination path (filename) for the data files. Accepts placeholders.
-  filename: "comment-{@id}-{fields.name-slug}"
   path: "_data/comments/{options.page_id_slug}"
+  filename: "comment-{@timestamp}-{fields.name-slug}"
 
   # The format of the generated data files. Accepted values are "json", "yaml"
   # or "frontmatter"
