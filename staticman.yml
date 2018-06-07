@@ -7,11 +7,11 @@ comments:
   #
   # Names of the fields the form is allowed to submit. If a field that is
   # not here is part of the request, an error will be thrown.
-  allowedFields: ["name", "email", "url", "message"]
+  allowedFields: ["page-id", "name", "email", "url", "message"]
 
   # Names of required files. If any of these isn't in the request or is empty,
   # an error will be thrown.
-  requiredFields: ["name", "email", "message"]
+  requiredFields: ["page-id", "name", "email", "message"]
 
   # (*) REQUIRED
   #
@@ -26,7 +26,7 @@ comments:
   #
   # Destination path (filename) for the data files. Accepts placeholders.
   filename: "comment-{@id}-{fields.name-slug}"
-  path: "_data/comments/{options.page-id-slug}"
+  path: "_data/comments/{fields.page-id-slug}"
 
   # The format of the generated data files. Accepted values are "json", "yaml"
   # or "frontmatter"
@@ -48,7 +48,7 @@ comments:
     page-id-slug:
       type: slugify
       options:
-        field: page-id 
+        field: page-id
 
   # Whether entries need to be appproved before they are published to the main
   # branch. If set to `true`, a pull request will be created for your approval.

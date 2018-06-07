@@ -31,10 +31,10 @@ layout: default
   <input name="options[redirect]" type="hidden" value="{{ page.url | absolute_url }}">
   <!-- e.g. "2016-01-02-this-is-a-post" -->
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
-  <input name="options[page-id]" type="hidden" value="{{ page.id }}">
-  <label><input name="fields[name]" type="text">Name</label>
-  <label><input name="fields[email]" type="email">E-mail</label>
-  <label><textarea name="fields[message]"></textarea>Message</label>
+  <input name="fields[page-id]" type="hidden" value="{{ page.id }}">
+  <label>Name<input name="fields[name]" type="text"></label>
+  <label>E-mail<input name="fields[email]" type="email"></label>
+  <label>Message<textarea name="fields[message]"></textarea></label>
 
   <button type="submit">Go!</button>
 </form>
