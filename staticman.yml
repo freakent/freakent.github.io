@@ -26,7 +26,7 @@ comments:
   #
   # Destination path (filename) for the data files. Accepts placeholders.
   path: "_data/comments/{options.page_id_slug}"
-  filename: "comment-{@timestamp}-{fields.name-slug}"
+  filename: "comment-{@fields.date}-{fields.name-slug}"
 
   # The format of the generated data files. Accepted values are "json", "yaml"
   # or "frontmatter"
