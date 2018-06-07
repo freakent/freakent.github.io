@@ -33,9 +33,9 @@ layout: default
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
   <input name="options[page_id_slug]" type="hidden" value="{{ page.id | slugify }}">
   <input name="fields[page_id]" type="hidden" value="{{ page.id }}">
+  <label>Message<textarea name="fields[message]"></textarea></label>
   <label>Name<input name="fields[name]" type="text"></label>
   <label>E-mail<input name="fields[email]" type="email"></label>
-  <label>Message<textarea name="fields[message]"></textarea></label>
 
   <button type="submit">Go!</button>
 </form>
