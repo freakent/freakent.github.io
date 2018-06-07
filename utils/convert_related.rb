@@ -45,7 +45,7 @@ site.collections['posts'].docs.each do |post|
         #puts "   "
         puts "*** #{post.id} #{Jekyll::Utils.slugify(post.id)} ***"
         path = "_data/related/#{Jekyll::Utils.slugify(post.id)}"
-        file_name = "related-#{comment["author"]}-#{comment["id"]}.yml"
+        file_name = "related-#{date.to_i}-#{comment["author"]}.yml"
         FileUtils::mkdir_p path unless File.directory? path
         File.open(path + '/' + file_name, 'w') {|f| f.write data.to_yaml }
       else

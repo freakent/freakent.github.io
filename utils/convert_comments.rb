@@ -46,7 +46,7 @@ site.collections['posts'].docs.each do |post|
         puts "*** #{post.id} #{Jekyll::Utils.slugify(post.id)} ***"
         date_dmy = post.data["date"].strftime("%Y-%m-%d")
         path = "_data/comments/#{Jekyll::Utils.slugify(post.id)}"
-        file_name = "comment-#{comment["author"]}-#{comment["id"]}.yml"
+        file_name = "comment-#{date.to_i}-#{comment["author"]}.yml"
         FileUtils::mkdir_p path unless File.directory? path
         File.open(path + '/' + file_name, 'w') {|f| f.write data.to_yaml }
       else
