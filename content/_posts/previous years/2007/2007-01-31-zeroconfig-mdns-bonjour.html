@@ -1,0 +1,115 @@
+---
+layout: post
+status: publish
+published: true
+title: Zeroconf / mDNS / Bonjour
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 54
+wordpress_url: http://www.freakent.co.uk/archives/54
+date: '2007-01-31 18:30:16 +0000'
+date_gmt: '2007-01-31 17:30:16 +0000'
+categories:
+- Internet
+- Windows
+- Linux
+- Internet of Things
+tags:
+- Apple
+comments:
+- id: 24
+  author: Martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2007-07-03 20:41:09 +0100'
+  date_gmt: '2007-07-03 19:41:09 +0100'
+  content: |-
+    Stuart Cheshire popped up on my Ipod today in a Podcast recorded by IT Conversations. There is now a plug in for Asterisk, the open source PBX, to automatically configure SIP clients. This is a very cool application for Bonjour. Bonjour could basically enable seamless VOIP roaming between networks. This may be the application that finally gives Bonjour the accolade it deserves. Listen to Stuart here:
+    http://www.itconversations.com/shows/detail1711.html
+- id: 25
+  author: Martin (Admin)
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2007-09-12 10:44:55 +0100'
+  date_gmt: '2007-09-12 09:44:55 +0100'
+  content: |-
+    Install on Ubuntu 704 Server:
+    $sudo apt-get install libnss-mdns
+
+    This will install, configure and start the avahi-daemon process. It will also edit /etc/nsswitch.conf to include mdns in name resolution.
+- id: 26
+  author: Martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2008-09-03 11:48:02 +0100'
+  date_gmt: '2008-09-03 10:48:02 +0100'
+  content: |-
+    Install on Redhat EL5 and CentOS 5.3:
+
+    Either download the source and compile with :
+    # ./configure
+    # make
+    # make install
+
+    or
+
+    Google for "nss-mdns rpm redhat". I found nss-mdns-0.10-2.el5.i386.rpm downloadable from atrpms.net.
+    As root:
+    # yum install nss-mdns*.rpm
+
+    Lastly, edit the nsswitch.conf file to tell the OS to use Bonjour in its DNS lookups.
+    # vi /etc/nsswitch.conf
+    replace hosts line with:
+    hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4
+- id: 27
+  author: martin
+  author_email: martin@chart-geek.com
+  author_url: ''
+  date: '2009-08-06 08:51:38 +0100'
+  date_gmt: '2009-08-06 07:51:38 +0100'
+  content: On Ubuntu Server 9.04 (Jaunty Jackalope), it worked straight out of the
+    box. No need to install or configure any extra packages. I like Ubuntu.
+- id: 28
+  author: martin
+  author_email: mzjarvis@gmail.com
+  author_url: ''
+  date: '2010-10-21 12:55:01 +0100'
+  date_gmt: '2010-10-21 11:55:01 +0100'
+  content: |-
+    New install of CentOS 5.5 and still no easy way of getting nss-mdns installed. Googled around again a discovered that it is available from the EPEL repository (http://fedoraproject.org/wiki/EPEL/FAQ).
+
+    To add EPEL to your list of Yum repositories,
+    $ sudo rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+
+    Then install nss-mdns like so,
+    $ sudo yum install nss-mdns
+
+    That's it!
+- id: 534
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2013-06-07 07:25:40 +0100'
+  date_gmt: '2013-06-07 07:25:40 +0100'
+  content: "Same problem on EL6 (Oracle Enterprise Linux 6.3 in this case).\r\n\r\n$
+    sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm\r\n$
+    sudo yum install nss-mdns\r\n\r\nSee the EPEL FAQ here:  http://fedoraproject.org/wiki/EPEL/FAQ#How_can_I_install_the_packages_from_the_EPEL_software_repository.3F"
+---
+<p><img class="alignright" src="http://images.apple.com/support/_images/hero_bonjour.jpg" alt="" align="right" />I have just discovered a whole area of IP based LAN technology I knew nothing about until this week! It's known by various names including Zeroconfig, mDNS and <a title="Thank you Apple!" href="http://www.apple.com/macosx/features/bonjour/" target="_blank">Bonjour </a>and I think this has the potential to completely change home networking.</p>
+<p>I have been toying with setting up a DNS server at home to resolve all the host names for the machines on my local LAN, but in my research I spotted a suggestion to use Zeroconfig instead. After a bit of digging I realised this stuff looks very good.</p>
+<p><!--more-->What ever you call it, Bonjour essentially does 3 things: IP address allocation without DHCP (in the range <tt>169.254.x.x)</tt>, host name resolution without a DNS server or local hosts files (Multicast DNS) and dynamic service discovery (which is more than just IP address lookups, this is IP address, protocol and port; so a device could, for example, advertise it has a live camera feed available via http on a particular port - very slick).</p>
+<p>It appears that Apple are leading this effort and brand it under the name Bonjour. So Mac's already have this technology built in. If you've used iTunes and accessed a shared iTunes library on another machine then you've already used Bonjour, even if you are on Windows. On Linux there are a couple of implementations, <em>howl</em> (which seems to be almost dead) and <em>avahi/nss-mdns</em>. I installed the latter on my Ubuntu server and it works perfectly.</p>
+<p>For Windows, Apple have released Bonjour for Windows. It looks like it just does printer sharing but it definitely also does host name resolution via mDNS. The other good thing is that it a free download. I don't suppose Vista has it built in, it would be so unlike Microsoft to actually follow a standard espcially since this one is designed by Apple.</p>
+<p>The architect behind the whole thing is Stuart Cheshire from Apple, and there is a good video of him presenting Bonjour and zeroconfig on <a title="Stuart Cheshire on Google Video" href="http://video.google.com/videoplay?docid=-7398680103951126462" target="_blank">Google Video</a>.</p>
+<p>Some other good links are :<br />
+<a title="http://www.ifcx.org/wiki/LocalNetworking.html" href="http://www.ifcx.org/wiki/LocalNetworking.html" target="_blank"> http://www.ifcx.org/wiki/LocalNetworking.html (good overview)</a><br />
+<a title="http://avahi.org (Linux)" href="http://avahi.org/" target="_blank"> http://avahi.org (Linux)</a><br />
+<a title="nss-mdns" href="http://0pointer.de/lennart/projects/nss-mdns/" target="_blank">http://0pointer.de/lennart/projects/nss-mdns (Linux)</a><br />
+<a title="Apple's Bonjour for Mac and Windows" href="http://www.apple.com/macosx/features/bonjour/" target="_blank"> http://www.apple.com/macosx/features/bonjour (Mac and Windows)</a><br />
+<a title="Spec for IP address allocation" href="http://files.zeroconf.org/rfc3927.txt" target="_blank"> http://files.zeroconf.org/rfc3927.txt (IP address allocation)</a></p>

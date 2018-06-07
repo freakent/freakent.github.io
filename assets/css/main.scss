@@ -4,6 +4,28 @@
 ---
 body {
   margin-top: 100px;
+  color: #51555c;
+  font-size: 14px;
+}
+
+h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited {
+  color: #51555c;
+  text-decoration: none;
+}
+
+h1 a:hover, h2:hover a, h3:hover a {
+  color: #a00004;
+  text-decoration: none;
+}
+
+a, a:visited,  {
+  color: #a00004;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #51555c;
+  text-decoration: none;
 }
 
 .navbar-brand small {

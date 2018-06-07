@@ -8,10 +8,9 @@ layout: default
   {% for post in paginator.posts %}
     <div class="blog-post">
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+      <p class="font-italic"><small>posted in {{ post.categories }} by {{ post.author.display_name }} on {{ post.date | date_to_long_string }}</small></p>
       <p>{{ post.excerpt }}</p>
-      <p class="font-italic">Continued...</p>
-      <p class="font-italic"><small>posted in {{ post.categories }}</small></p>
-      <p class="font-italic"><small>by {{ post.author.display_name }} on {{ post.date | date_to_long_string }}</small></p>
+      <p class="font-italic"><a href="{{ post.url }}">Read more ></a></p>
     </div>
     <hr>
   {% endfor %}

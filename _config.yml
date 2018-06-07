@@ -17,9 +17,10 @@ title: Stuff for Gadgeteers and Makers
 subtitle: Gadgets, Software, Arduino and The Internet of Things
 email: freakent@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  I blog about the things that interest me, or things that if I don't write down
+  I will probably forget. Professionaly I'm a tech guy with close to 30 years in the IT Industry.
+  You could say I' a bit of a <i>Geek</i> who travels quite a lot. I write this Blog for
+  myself, if it helps inform or entertain others then that's a bonus!
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: freakent
@@ -33,10 +34,13 @@ paginate: 10
 paginate_path: "/blog/page:num"
 sass:
   style: compact # possible values: nested expanded compact compressed
+# List of plugins in-use, supported by github pages
 plugins:
+#  - jekyll-include-cache
   - jekyll-feed
   - jekyll-paginate
-collections_dir: collections
+#  - jekyll-seo-tag
+collections_dir: content
 #collections:
 #  events:
 #    output: true

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+
+    <main role="main" class="container">
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+        {{ content }}
+
+        </div>
+
+        {% include sidebar.html %}
+
+        </div><!-- /.row -->
+
+    </main><!-- /.container -->
+
+
+    {% include footer.html %}
+
+  </body>
+</html>

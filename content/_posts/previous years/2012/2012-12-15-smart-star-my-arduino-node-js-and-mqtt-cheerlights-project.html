@@ -1,0 +1,127 @@
+---
+layout: post
+status: publish
+published: true
+title: Smart Star - My Arduino, Node.js and MQTT CheerLights Project
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 524
+wordpress_url: http://www.freakent.co.uk/?p=524
+date: '2012-12-15 11:02:28 +0000'
+date_gmt: '2012-12-15 11:02:28 +0000'
+categories:
+- Software Development
+- Internet of Things
+tags:
+- twitter
+- Arduino
+- mqtt
+- node.js
+comments:
+- id: 173
+  author: Tony Hickman
+  author_email: tony_hickman@mac.com
+  author_url: https://www.ibm.com/developerworks/mydeveloperworks/blogs/hickmat/?lang=en
+  date: '2012-12-17 08:49:29 +0000'
+  date_gmt: '2012-12-17 08:49:29 +0000'
+  content: Very cool - I've been playing with something similar using my Raspberry
+    PI so I'll re-use your Node.js code to give me a jump start on the twitter integration.  I've
+    already got the GPIO bridged to MQTT so joining things up should be simple
+- id: 183
+  author: Robin Laur&eacute;n
+  author_email: llauren@gmail.com
+  author_url: http://Robin.Lauren.fi
+  date: '2012-12-19 18:58:50 +0000'
+  date_gmt: '2012-12-19 18:58:50 +0000'
+  content: "How nifty! \r\n\r\nI'm considering to implement my own Cheerlight using
+    a BlinkM and some other bits and bobs i haven't really identified yet. Perhaps
+    an Arduino nano + an Ethernet module, or perhaps a TP-Link TP-WR703n with an Arduino.
+    Or something. Having been bitten by the MQTT bug, i too thought MQTT would be
+    the perfect transport protocol.\r\n\r\nI don't suppose you would allow worldwide
+    read (subscribe) access to your MQTT server? On the other hand, maybe it would
+    be a good excercise for me to set up a Node.js server on my other Pi. If it runs
+    on such minimal hardware."
+- id: 184
+  author: Robin Laur&eacute;n
+  author_email: llauren@gmail.com
+  author_url: http://Robin.Lauren.fi
+  date: '2012-12-19 20:55:15 +0000'
+  date_gmt: '2012-12-19 20:55:15 +0000'
+  content: "Okay, congratulations -- you have me inspired!\r\n\r\nI installed nodejs
+    on my Pi. I downloaded your code. I quickly learned about npm. I installed npm
+    and most modules, except for sugar, which just doesn't want to download. That
+    means i'm missing the .each method (?) to look for cheer colours.\r\n\r\nThe suspense
+    is a torture!"
+- id: 185
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2012-12-19 22:33:58 +0000'
+  date_gmt: '2012-12-19 22:33:58 +0000'
+  content: If you can't get sugar to work on the Pi you'll just have use a for loop
+    and a bit of substring'ing to parse the Twitter message. Although I'm surprised
+    sugar didn't work for you.
+- id: 191
+  author: Robin Laur&eacute;n
+  author_email: llauren@gmail.com
+  author_url: http://Robin.Lauren.fi
+  date: '2012-12-20 20:35:46 +0000'
+  date_gmt: '2012-12-20 20:35:46 +0000'
+  content: "Actually, shortly after i published my lament, i did get Sugar installed.
+    But you're right. I just haven't doing any coding for the last ever. \r\n\r\nI
+    haven't checked through the Cheerlights specs, but what about using the full XColors
+    list (http://en.wikipedia.org/wiki/Template:XColor) and parsing out the RGB as
+    PWM values to LEDs?"
+- id: 204
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2012-12-24 12:32:58 +0000'
+  date_gmt: '2012-12-24 12:32:58 +0000'
+  content: Nice idea about XColor, if I do another CheerLights project next year using
+    RGB LEDs I'll use that.
+- id: 2173
+  author: martin
+  author_email: martin@freakent.co.uk
+  author_url: http://www.freakent.co.uk
+  date: '2013-12-30 18:54:53 +0000'
+  date_gmt: '2013-12-30 18:54:53 +0000'
+  content: I updated my Cheerlights rig this year, replacing the Twitter listener
+    with a simple Node-Red flow. I posted my flow as a Gist here https://gist.github.com/freakent/8186221.
+- id: 20152
+  author: Smart Star &#8211; Arduino, Node.js, and MQTT | CheerLights
+  author_email: ''
+  author_url: http://cheerlights.apps-1and1.com/smart-star-arduino-nodejs-and-mqtt
+  date: '2015-09-09 20:23:50 +0100'
+  date_gmt: '2015-09-09 20:23:50 +0100'
+  content: "[&#8230;] Rube Goldberg is&nbsp;smiling. The &ldquo;Smart Star&rdquo;
+    project links together many technologies and produces a very nice result. [Martin]
+    created a [&#8230;]"
+---
+<p>A few years ago I bought a large outdoor Christmas decoration from our local B&amp;Q DIY store. It's made up of three rope lights (one blue, one green and one reddish purple) arranged around a frame to form a Multi coloured Christmas star. After just a couple of seasons the flashing control unit just stopped working and the lights were useless. Despite knowing very little about electronics I decided I should try to build my own control unit using an Arduino. Then I read about the <a title="CheerLights" href="http://www.cheerlights.com/" target="_blank">Cheerlights</a> project. I figured that if I'm going to build a new controller then why not build it so it can be hooked into Twitter and join in the CheerLights fun.</p>
+<p>Here's a video of my "Smart Star" working.<br />
+[youtube=http://www.youtube.com/watch?v=vRsFYel0NrM&amp;w=500]</p>
+<p><!--more--></p>
+<p>Inititally you see the star is going through a pre-programmed standard light sequequence. I then send a Tweet that includes a combination of the colours in my star. The star then displays a light sequence based on the pattern I sent in the Tweet. After a short while the star will go back to the standard pre-programmed sequence until the next CheerLights Tweet is received.</p>
+<p><a title="CheerLights" href="http://www.cheerlights.com/" target="_blank">CheerLights</a> is a festive, social project that aims to synchronise the Christmas lights of many people around the world using Twitter. The concept is simple, when someone Tweets a message that contains one or more colours then all the connected lights should display that colour. Tweets should either mention @cheerlights or include the hash tag #cheerlights to be picked up. Much more information is available from the <a title="CheerLights" href="http://www.cheerlights.com/control-cheerlights" target="_blank">CheerLights</a> web site. CheerLights republish their Twitter stream as an RSS feed to help make it simpler to use but part of my motivation for doing this project was to understand how to directly parse and analyse Twitter streams.</p>
+<p>Obviously people can Tweet pretty much any colour they like, but since I only have three colours in my star I decided to just ignore any other colours. Although I still can't decide whether my purple light is actually red or purple so I have set up my lights to respond to either. I also thought about how to interpret patterns in messages that would light colours simultaneously, but since most people only tweet a single colour I decided that was probably overkill this year.</p>
+<p style="text-align: left;">Here is an overview of all the components of the Smart Star.</p>
+<p style="text-align: center;"><a href="http://www.freakent.co.uk/wp-content/uploads/2012/12/smartstar.png"><img class="aligncenter  wp-image-526" title="Smart Star Components" alt="" src="http://www.freakent.co.uk/wp-content/uploads/2012/12/smartstar.png" width="510" /></a></p>
+<p><strong>Star Lights</strong><br />
+As I said earlier the star is made of three separate rope lights, each one a different colour. I was surprised to discover that the lights themselves require mains power, that's 240v AC where I live. That's pretty dangerous stuff so you have to be very careful. It also meant I was also going to have to find some bigger relays that could cope with the higher current.</p>
+<p><strong>Light Controller</strong><br />
+The controller is made up of an Arduino micro controller, a Sparkfun WiFly shield for WiFi networking and three big relays I bought as <a title="Ciseco relays" href="http://shop.ciseco.co.uk/kit-relay-board-simple-to-use-5v-operation-supports-logic-level-also-10amp/">kits from Ciseco</a>. I wasn't sure initially what relays to use with mains electricity but <a title="Ciseco" href="http://shop.ciseco.co.uk/">Ciseco</a> were really helpful and pointed me in the right direction. The relays are connected to three digital outputs on the Arduino. The controller subscribes to an MQTT Topic for control instructions whilst cycling through a standard sequence of light patterns. When a CHEER message is received through MQTT, it parses the message and creates a new temporary light sequence that it cycles through. After a short while it will switch back to the standard sequence or respond to another CHEER message, whichever happens first. To control switching the lights on and off it also listens for ON and OFF messages. <a title="Arduino code" href="https://github.com/freakent/smart_star" target="_blank">My code for the Arduino</a> is up on Git Hub along with versions of the <a title="MQTT for Arduino and WiFly" href="https://github.com/freakent/pubsubclient" target="_blank">Arduino MQTT</a> and <a title="Arduino WiFly Library " href="https://github.com/freakent/WiFly" target="_blank">WiFly libraries</a> which I tweaked to make the whole system a little more resilient to networking issues.</p>
+<p><strong>MQTT Broker</strong><br><br />
+<a title="MQ Telemetry Transport (MQTT)" href="http://www.freakent.co.uk/2012/01/18/mq-telemetry-transport-mqtt/">MQTT</a> is a light weight publish and subscribe messaging protocol designed for small devices. The MQTT protocol uses the concept of topics for the exchange of messages between a publisher and one or more subscribers. The actual communication between the MQTT broker and the publishers and subscribers is over standard TCP sockets, hence the reason for using the WiFi shield on the Arduino. I am using the open source <a title="Open Source MQTT Broker" href="http://mosquitto.org/" target="_blank">Mosquitto Server</a> as the MQTT broker, running on my little home server (a Mini-ITX server based on an Intel Atom chipset running Ubuntu Linux). Mosquitto and MQTT are very easy to implement and extremely reliable, I highly recommend them.</p>
+<p><strong>Twitter Listener</strong><br />
+The listener connects to both Twitter's streaming API and to the MQTT broker. When a suitable CheerLights message is received from Twitter it creates a light pattern string and publishes it as a CHEER message to the MQTT Broker. The light pattern is just a simple string where each coloured light is represented by a single letter. The listener is implemented using Node.js and relies on generally available node libraries for Twitter and MQTT integration. The Liistener also uses a cron library to schedule sending OFF and ON messages to the light controller at set times. The Listener run on the same small Linux server as the MQTT Broker. <a title="Smart Star Listener" href="https://github.com/freakent/smartstar.js" target="_blank">My code for the listener</a> is also up on GitHub.</p>
+<p>I'm particularly pleased with my project box to house all the components. With mains electricity it is very important to make sure fingers don't accidentally touch electrical contacts. I also wanted to insulate the mains components from the Arduino. My solution was a plastic washing soap container with a hinged plastic lid. I was able to drill holes in the side just large enough to feed the cables through and used cable ties to prevent them pulling back through. The relays and mains wires sit below the Arduino and are separated and insulated by a layer of polystyrene tile cut to size. The body of the container is clear so I can keep an eye on all the LEDs without having to open the container. It might not be pretty but it's safe and good enough for just a months use.<br />
+<a href="http://www.freakent.co.uk/wp-content/uploads/2012/12/IMG_0727.jpg"><img class=" wp-image-541 alignleft" title="Smart Star project box " alt="" src="http://www.freakent.co.uk/wp-content/uploads/2012/12/IMG_0727.jpg" width="350" height="219" /></a><br />
+<a href="http://www.freakent.co.uk/wp-content/uploads/2013/01/20130106-090827.jpg"><img class="alignnone size-full" alt="20130106-090827.jpg" src="http://www.freakent.co.uk/wp-content/uploads/2013/01/20130106-090827.jpg" /></a><br />
+My Raspberry Pi arrived after I had this set up working. I did consider reimplementing the whole thing just using the PI or more likely a combination of Arduino and Pi. That would have enabled me to remove the WiFly from the solution and I probably would not have needed to use the MQTT Broker as the Listener could have run directly on the Pi. May be next year!</p>

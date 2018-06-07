@@ -1,0 +1,37 @@
+---
+layout: post
+status: publish
+published: true
+title: Testing jQuery Autocomplete using Capybara
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 511
+wordpress_url: http://www.freakent.co.uk/?p=511
+date: '2012-02-26 23:45:40 +0000'
+date_gmt: '2012-02-26 23:45:40 +0000'
+categories:
+- Software Development
+- Ruby-on-Rails
+tags:
+- jquery
+- autocomplete
+- capybara
+- testing
+- selenium
+comments: []
+---
+<p>This is a brilliant tip. I would never have worked this out on my own. Thank you&nbsp;Jack Russell Software Company.</p>
+<p>http://jackhq.tumblr.com/post/3728330919/testing-jquery-autocomplete-using-capybara</p>
+<p>The sleep commands were the critical bit, without them Selenium just wasn't firing the JavaScript event handlers.<br />
+<!--more--><br />
+Here are the relevant lines from my integration test.<br />
+<code>    # We are looking for "Make Two"&nbsp; &nbsp;&nbsp;<br />
+    s.fill_in "Make", :with => "Make"<br />
+    sleep 1<br />
+    page.execute_script("$('.ui-menu-item a:contains(\"Make Two\")').trigger('mouseenter').click();")</code></p>

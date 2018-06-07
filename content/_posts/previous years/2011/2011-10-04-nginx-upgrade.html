@@ -1,0 +1,67 @@
+---
+layout: post
+status: publish
+published: true
+title: Nginx Upgrade
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 420
+wordpress_url: http://www.freakent.co.uk/?p=420
+date: '2011-10-04 15:45:40 +0100'
+date_gmt: '2011-10-04 15:45:40 +0100'
+categories:
+- Linux
+- Ruby-on-Rails
+tags:
+- Linux
+- mod_rails
+- passenger
+- ruby-on-rails
+- ubuntu
+- nginx
+comments: []
+---
+<p><img class="alignright" src="http://wiki.nginx.org/local/nginx-logo.png" alt="nginx" width="200" height="90" />Today I needed to update my <a href="http://wiki.nginx.org/">nginx</a> server to support serving of static gzipped asset files alongside <a href="http://www.modrails.com/index.html">Passenger</a> (Rails 3.1 asset pipeline - <a href="http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets">server configuration</a>). My install was already a bit of a hack after trying various ways to originally get it installed. This update needed the whole thing to be re-built from source so I decided to get the latest source and write myself some notes so that it won't be so hard next time.</p>
+<p><!--more-->Inspiration came from this excellent blog post: <a href="http://extralogical.net/articles/howto-compile-nginx-passenger.html">How to compile your own Nginx and Passenger</a></p>
+<p>Based on that blog post I just downloaded the source from <a href="http://nginx.org/ru/download.html">nginx</a> then wrote myself this little shell script.<br />
+--- build.sh ---<code>#!/bin/bash<br />
+# Load RVM Functions into shell<br />
+[[ -s "/usr/local/lib/rvm" ]] &amp;&amp; . "/usr/local/lib/rvm"<br />
+[[ -r $rvm_path/scripts/completion ]] &amp;&amp; . $rvm_path/scripts/completion<br />
+#<br />
+rvm use ree<br />
+rvm current<br />
+#<br />
+echo passenger gem is installed in:<br />
+passenger-config --root<br />
+echo<br />
+export PASSENGER_NGINX_DIR=`passenger-config --root`/ext/nginx<br />
+echo PASSENGER_NGINX_DIR=$PASSENGER_NGINX_DIR<br />
+#<br />
+NGINX_SRC_DIR=`pwd`/nginx-1.0.8/<br />
+echo Building $NGINX_SRC_DIR<br />
+#<br />
+cd $NGINX_SRC_DIR<br />
+./configure \<br />
+--prefix=/usr/local \<br />
+--sbin-path=/usr/sbin \<br />
+--conf-path=/etc/nginx/nginx.conf \<br />
+--error-log-path=/var/log/nginx/error.log \<br />
+--http-log-path=/var/log/nginx/access.log \<br />
+--with-http_ssl_module \<br />
+--with-http_gzip_static_module \<br />
+--add-module=$PASSENGER_NGINX_DIR<br />
+make<br />
+make install<br />
+#<br />
+echo All done. Just edit /etc/nginx/nginx.conf to ensure it is<br />
+echo picking up correct version of Passenger<br />
+</code></p>
+<p>&nbsp;</p>
+<p>Next time all I need to do is edit this script.</p>

@@ -1,0 +1,39 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Install Oracle JDK on Oracle Linux '
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 762
+wordpress_url: http://www.freakent.co.uk/?p=762
+date: '2013-05-07 14:31:08 +0100'
+date_gmt: '2013-05-07 14:31:08 +0100'
+categories:
+- Linux
+tags:
+- java
+- Oracle Linux
+- jdk
+comments: []
+---
+<p>I could't find a reference to this in the JDK Install instructions so I thought I'd make a note of it here.</p>
+<p>I installed the latest Oracle JDK on Oracle Linux using the RPM downloaded from here, but when I checked the version number I was still getting OpenJDK.<br />
+<code># rpm -ivh jdk-7u21-linux-x64.rpm<br />
+...<br />
+# java -version<br />
+java version "1.7.0_19"<br />
+OpenJDK Runtime Environment (rhel-2.3.9.1.0.1.el6_4-x86_64)<br />
+OpenJDK 64-Bit Server VM (build 23.7-b01, mixed mode)</code></p>
+<p>The solution is to use the RedHat "alternatives" utility.</p>
+<p>1) Register the newly installed Oracle JDK with "alternatives"</p>
+<p><code># alternatives&nbsp;--install /usr/bin/java java /usr/java/default/bin/java 2</code></p>
+<p>2) Set the new JDK to be the default</p>
+<p><code># alternatives --config java</code></p>
+<p>Choose the option that represents the Java version you require.</p>

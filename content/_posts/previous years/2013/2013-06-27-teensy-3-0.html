@@ -1,0 +1,30 @@
+---
+layout: post
+status: publish
+published: true
+title: Teensy 3.0, like Arduino but better
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 782
+wordpress_url: http://www.freakent.co.uk/?p=782
+date: '2013-06-27 22:03:24 +0100'
+date_gmt: '2013-06-27 22:03:24 +0100'
+categories:
+- Internet of Things
+tags:
+- Arduino
+- xbee
+- Teensy
+comments: []
+---
+<p><a href="http://www.freakent.co.uk/wp-content/uploads/2013/06/20130627-225930.jpg"><img class="alignright" alt="20130627-225930.jpg" src="http://www.freakent.co.uk/wp-content/uploads/2013/06/20130627-225930.jpg" width="200" /></a>I've been looking for a low cost and smaller footprint Arduino board to use with XBee. <a href="http://www.pjrc.com/teensy/index.html">Teensy 3.0</a> is now officially my favourite Arduino board.</p>
+<p>I had high hopes for <a title="Digispark from DigiStump" href="http://digistump.com/products/1" target="_blank">DigiSpark</a> but it doesn't have a serial UART and I wasn't able to get the software serial library to work with it. The need to have 5V to 3.3V logic conversion didn't help either. Then I stumbled upon Teensy, a range of really small Arduino compatible boards. The latest model is the Teensy 3.0, powered by a 32bit ARM Cortex-M4 processor. Unlike most other Arduino boards, the Teensy 3.0 runs at 3.3V not 5V. This makes it much simpler to connect the Teensy 3.0 to an XBee which also runs at 3.3V. It has more analog and digital IO pins than a regular Arduino and THREE hardware serial ports. The USB connection can also be used to send additional Serial messages to the Arduio IDE serial monitor, very useful for debugging XBee serial communication without the debug messages&nbsp;interfering&nbsp;with the XBee communication.</p>
+<p><!--more-->Like the DigiSpark, the latest Teensy 3.0 was also a successful KickStarter project. The Teensy 3.0 is now available from <a title="PJRC" href="http://www.pjrc.com/store/teensy3.html" target="_blank">PJRC's</a> web site and other online electronics retailers. I ordered mine through <a title="Proto-Pic" href="http://proto-pic.co.uk/teensy-3-0/" target="_blank">Proto-Pic</a> in the UK and it arrived less than 48 hours later.</p>
+<p>It didn't take long to get the regular Arduino Blink program running on the Teensy. Soon after that I had the Teensy on a breadboard and wired up to an XBee on one of the Teensy's three serial ports. I'm really pleased with how painless it's been to get the Teensy 3.0 working. I will be ordering more for future projects.</p>
+<p style="text-align: center;"><a href="http://www.freakent.co.uk/wp-content/uploads/2013/06/20130627-230211.jpg"><img class="aligncenter" alt="20130627-230211.jpg" src="http://www.freakent.co.uk/wp-content/uploads/2013/06/20130627-230211.jpg" width="400" /></a></p>

@@ -1,0 +1,61 @@
+---
+layout: post
+status: publish
+published: true
+title: SELinux problem with Oracle 11g
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 372
+wordpress_url: http://www.freakent.co.uk/?p=370
+date: '2010-11-09 08:07:59 +0000'
+date_gmt: '2010-11-09 08:07:59 +0000'
+categories:
+- Linux
+- Oracle
+tags:
+- Linux
+- oracle
+- database
+comments: []
+---
+<p><a href="http://www.oracle.com"><img class="alignright" title="Oracle Database 11g" src="http://www.oracleimg.com/technetwork/middleware/bi-foundation/oracle-database-11g-1-121135.gif" alt="" width="129" height="39" /></a>I have just done a fresh install of Oracle 11g R2 on a Linux VM running on my little server.&nbsp; Install was a breeze, it even auto generated a script to set all the necessary operating system parameters. However, after the installation I could not get SQL*Plus to start due to a SELinux problem.<!--more--></p>
+<p>This is the error I received when trying to start SQL*Plus:<br />
+<code>$ sqlplus / as sysdba<br />
+sqlplus: error while loading shared libraries: /oracle/product/11.2.0/dbhome/lib/libclntsh.so.11.1:cannot restore segment prot after reloc: Permission denied</code></p>
+<h2>Solution A</h2>
+<p>After a bit of Googling I found two solutions. The first was :</p>
+<p>(run as root)<br />
+<code># /usr/sbin/getenforce<br />
+Enforcing<br />
+# /usr/sbin/setenforce 0<br />
+# /usr/sbin/getenforce<br />
+Permissive</code><br />
+Only problem with this method was that once the machine was rebooted, the settings were lost as SQL*Plus produced the same error.</p>
+<h2>Solution B</h2>
+<p>A bit more Googling gave me this alternative solution:</p>
+<p>Open two terminal windows, run one as root and one as oracle.</p>
+<p>(as root)<br />
+<code># tail -f /var/log/audit/audit.log | tee oracle.log</code></p>
+<p>(as oracle)<br />
+<code>$ sqlplus / as sysdba<br />
+sqlplus: error while loading shared libraries: /oracle/product/11.2.0/dbhome/lib/libclntsh.so.11.1: cannot restore segment prot after reloc: Permission denied</code><br />
+(as root)</p>
+<p><em>crtl-c (to abort the tail)</em><br />
+<code>#audit2allow -M oracle < oracle.log<br />
+******************** IMPORTANT ***********************<br />
+To make this policy package active, execute:<br />
+semodule -i oracle.pp<br />
+# /usr/sbin/semodule -i oracle.pp</code></p>
+<p>(as oracle),p><br />
+<code>$ sqlplus / as sysdba<br />
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Nov 8 18:05:32 2010<br />
+Copyright (c) 1982, 2009, Oracle.&nbsp; All rights reserved.<br />
+Connected to an idle instance.<br />
+SQL></code></p>
+<p>Afterwards I shut everything down and rebooted. This time it all worked without further problems.</p>

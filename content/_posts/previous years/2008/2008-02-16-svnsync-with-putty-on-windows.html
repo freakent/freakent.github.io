@@ -1,0 +1,66 @@
+---
+layout: post
+status: publish
+published: true
+title: svnsync with PuTTY on Windows
+author:
+  display_name: martin
+  login: martin
+  email: martin@freakent.co.uk
+  url: http://www.freakent.co.uk
+author_login: martin
+author_email: martin@freakent.co.uk
+author_url: http://www.freakent.co.uk
+wordpress_id: 131
+wordpress_url: http://www.freakent.co.uk/archives/131
+date: '2008-02-16 09:12:22 +0000'
+date_gmt: '2008-02-16 08:12:22 +0000'
+categories:
+- Windows
+tags:
+- putty
+- ssh
+- svn
+- version control
+comments: []
+---
+<p>Objective:</p>
+<p>Maintain a copy of my local Subversion repository on my hosting server ready for deployment of my application using Capistrano.</p>
+<p><!--more-->Steps:</p>
+<ol>
+<li>Create remote svn repository</li>
+<li>Set up svn+ssh using PuTTY on Windows
+<ol>
+<li>Download plink.exe and puttygen.exe to you local machine.</li>
+<li>run puttygen and generate a public/private key pair<br />
+Don't set a pass phrase and svn will not prompt you for it later.</li>
+<li>Save the private key to keyfile.ppk on your local hard disk.</li>
+<li>On the remote host open a file ~/.ssh/authorized_keys and paste in the public key from puttygen.<br />
+Make sure the string fits on a single continuous line.</li>
+<li>In the file abov, pre-pend <em>command="svnserve -t"</em> to the start of the public key.<br />
+This forces the svnserve process to run when ever someone connects using this key pair. Having no passphrase on the key pair isn't great for security but at least you are restricting access to just svn and not the whole shell.</li>
+<li>On the local Windows machine, edit <em>%Application Data%\Subversion\config</em>, under the [tunnels] section add<br />
+<em>[tunnels]</em><br />
+<em>ssh =plink -i \path\to\keyfile.ppk<br />
+(use back slashes / despite it being on Windows)<br />
+</em></li>
+<li>Test using <em>svn info svn+ssh://username@host.com/home/username/svn-repos/application</em></li>
+</ol>
+</li>
+<li>Set up two environment variables to save on the typing<br />
+<em>set torepos=svn+ssh://username@host.com/home/username/svn-repos/application<br />
+set fromrepos=file:///s:/svn-repos</em></li>
+<li>Initialise the synchronisation set up<br />
+<em>svnsync init %torepos% %fromrepos%</em></li>
+<li>Check the synchronisation parameters have been correctly set on the remote repository<br />
+<em>svn proplist --revprop -r 0 %to%<br />
+svn propget svn:sync-from-url --revprop -r 0 %torepos%</em></li>
+<li>Now do the sync<br />
+<em>svnsync sync %torepos%</em></li>
+<li>Sit back and wait, or in my case, go to bed.</li>
+</ol>
+<p>Sources of inspiration:</p>
+<ul>
+<li><a href="http://journal.paul.querna.org/articles/2006/09/14/using-svnsync/">http://journal.paul.querna.org/articles/2006/09/14/using-svnsync/</a></li>
+<li><a href="http://svnbook.red-bean.com/en/1.4/svn.reposadmin.maint.html#svn.reposadmin.maint.replication">http://svnbook.red-bean.com/en/1.4/svn.reposadmin.maint.html#svn.reposadmin.maint.replication</a></li>
+</ul>
