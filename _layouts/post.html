@@ -31,6 +31,7 @@ layout: default
   <input name="options[redirect]" type="hidden" value="{{ page.url | absolute_url }}">
   <!-- e.g. "2016-01-02-this-is-a-post" -->
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
+  <input name="options[page_id_slug]" type="hidden" value="{{ page.id | slugify }}">
   <input name="fields[page_id]" type="hidden" value="{{ page.id }}">
   <label>Name<input name="fields[name]" type="text"></label>
   <label>E-mail<input name="fields[email]" type="email"></label>

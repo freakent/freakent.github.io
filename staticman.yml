@@ -20,7 +20,7 @@ comments:
   branch: "master"
 
   # Text to use as the commit message or pull request title. Accepts placeholders.
-  commitMessage: "Comment on blog {options.slug} by {fields.name} via Staticman"
+  commitMessage: "Comment on blog {field.page_id} by {fields.name} [Staticman]"
 
   # (*) REQUIRED
   #
@@ -45,10 +45,6 @@ comments:
       type: slugify
       options:
         field: name
-    page-id-slug:
-      type: slugify
-      options:
-        field: page_id
 
   # Whether entries need to be appproved before they are published to the main
   # branch. If set to `true`, a pull request will be created for your approval.
