@@ -1,0 +1,6 @@
+{% assign media_path = page.date | date: '%Y/' | append:page.slug | prepend: page.media_path %}
+<p style="text-align: center;">
+  <a href="{{media_path}}/{{ include.src }}">
+    <img class="aligncenter  wp-image-526" title="{{include.title}}" alt="" src="{{media_path}}/{{ include.src }}" width="510" />
+  </a>
+</p>
