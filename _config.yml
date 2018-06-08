@@ -53,6 +53,8 @@ defaults:
     values:
       layout: "post"
       permalink: /blog/:year/:month/:day/:title:output_ext
+      author: "Martin"
+      media_path: /assets/img/ 
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -65,5 +67,6 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - bin
+  - scripts
+  - archive
   - README.md
