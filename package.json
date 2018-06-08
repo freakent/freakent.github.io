@@ -1,0 +1,22 @@
+{
+  "name": "freakent",
+  "version": "1.0.0",
+  "description": "FreakEnt Website & Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freakent/freakent.github.io.git"
+  },
+  "author": "Martin Jarvis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freakent/freakent.github.io/issues"
+  },
+  "homepage": "https://github.com/freakent/freakent.github.io#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.1"
+  }
+}

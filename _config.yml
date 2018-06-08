@@ -34,6 +34,7 @@ paginate: 10
 paginate_path: "/blog/page:num"
 sass:
   style: compact # possible values: nested expanded compact compressed
+  sass_dir: _sass
 # List of plugins in-use, supported by github pages
 plugins:
 #  - jekyll-include-cache
@@ -54,7 +55,7 @@ defaults:
       layout: "post"
       permalink: /blog/:year/:month/:day/:title:output_ext
       author: "Martin"
-      media_path: /assets/img/ 
+      media_path: /assets/img/
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
