@@ -2,7 +2,7 @@
 # this ensures Jekyll reads the file to be transformed into CSS later
 # only Main files contain this front matter, not partials.
 ---
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 body {
   margin-top: 100px;
