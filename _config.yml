@@ -54,7 +54,8 @@ defaults:
     values:
       layout: "post"
       permalink: /blog/:year/:month/:day/:title:output_ext
-      author: "Martin"
+      author:
+        display_name: "Martin"
       media_path: /assets/img/
 
 # Exclude from processing.
